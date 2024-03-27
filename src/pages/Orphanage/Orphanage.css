@@ -1,0 +1,237 @@
+*{
+    margin: 0;
+}
+
+.two-pagecontent{
+    min-width: 1250px;
+}
+/* for header */
+
+.two-header{
+    width: 100%;
+    padding: 0.4rem;
+    height: 4.5rem;
+    box-sizing: border-box;
+    background-color: #fffffffb;
+    background-repeat: repeat-x;
+    display: flex;
+    position: sticky;
+    top: 0;
+
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 12px 14px 18px 1px rgba(171,171,171,0.75);
+    -webkit-box-shadow: 12px 14px 18px 1px rgba(171,171,171,0.75);
+    -moz-box-shadow: 12px 14px 18px 1px rgba(171,171,171,0.75);
+}
+
+.two-logo{
+  
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.two-logo-img{
+    width: 300px;
+    height: 80%;
+}
+
+.two-search{
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.two-se-input:focus{
+    background: #67876415;
+    box-shadow: 0px 6px 39px 0px rgba(231, 231, 231, 0.645);
+    transition: 0.1s;
+}
+.two-se-input:hover{
+    background: #67876415;
+    box-shadow: 0px 6px 39px 0px rgba(231, 231, 231, 0.645);
+    transition: 0.1s;
+}
+
+.two-se-input{
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    height: 65%;
+    width: 350px;
+    border-radius: 1rem 1rem 1rem 1rem;
+    background: #6787646b;
+}
+
+.two-header-icons{
+    width: 30rem; 
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    align-items: center;
+    
+}
+
+.two-header-btn {
+    width: 70px;
+    height: 40px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: #668663;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+}
+
+.two-header-btn:hover{
+    height: 50px;
+    outline: none;
+    background: #b6d9b3;
+    box-shadow: 0px 6px 39px 0px rgba(231, 231, 231, 0.645);
+    transition: 0.two-1s;
+}
+.two-header-btn:focus{
+    height: 50px;
+    outline: none;
+}
+
+.two-acc-icon{
+    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    box-sizing: border-box;
+    box-shadow: none;
+    background: #668663;
+
+}
+
+
+.two-acc-dpdown{
+    background: #668663;
+    box-sizing: border-box;
+    width: 60px;
+}
+.two-dropdown-item{
+    box-sizing: border-box;
+    font-size: 0.8rem;
+}
+
+
+/* Section One */
+
+.two-section-one{
+    margin-top: 70px;
+}
+.two-secone-divone{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+
+}
+
+.two-orp-img{
+    display: flex;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+    width: 320px;
+    height: 320px;
+    background-color: #b6d9b3;
+    transition: 0.3s;
+    box-shadow: 1px 1px 12px 6px rgba(156,156,156,0.75);
+    -webkit-box-shadow: 1px 1px 12px 6px rgba(156,156,156,0.75);
+    -moz-box-shadow: 1px 1px 12px 6px rgba(156,156,156,0.75);
+}
+
+.two-orp-img:hover{
+    box-shadow: none;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+.two-about-orp{
+    background-image: url("../../images/helpafriendtransperent.png");
+    background-position-x: center;
+    background-position-y: -240px;
+    
+}
+
+.two-abt-orp-mesh{
+    background-color: rgba(255, 255, 255, 0.912);
+}
+
+.two-orp-name{
+    font-family: "Madimi One", sans-serif;
+    color: #123312;
+    
+}
+
+.two-orp-abt{
+    font-family: "Madimi One", sans-serif;
+    color: #b5c2b4;
+}
+.two-orp-bio{
+    padding: 10px 0px 0px 0px;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    overflow: auto;
+    width: 650px;
+    height: 250px;
+    overflow-wrap: break-word;
+}
+
+.two-orp-details{
+    border: #b6d9b3 2px dashed;
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+    margin: 40px 20px 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6f776f;
+    font-family: "Madimi One", sans-serif;
+    transition: 0.5s;
+}
+
+.two-orp-details:hover{
+    color: #b6d9b3;
+    border: dotted 2px #b6d9b3;
+    padding: 5px 25px 5px 25px;   
+    transition: 0.5s;
+
+}
+
+/* Section 2 */
+
+.two-section-two{
+    margin-left: 40px;
+}
+
+.two-orp-img-list{
+    padding: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.two-orp-img-one{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 250px;
+    height: 200px;
+    background-color: #b6d9b3;
+    transition: 0.3s;
+  
+}

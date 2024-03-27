@@ -1,0 +1,330 @@
+*{
+    margin: 0;
+}
+
+
+
+.pagecontent{
+    background-image: url("https://www.economist.com/cdn-cgi/image/width=1096,quality=80,format=auto/sites/default/files/images/print-edition/20170826_MAP003_0.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+    min-height: 100vh;
+    min-width: 1250px;
+    display: flex;
+    flex-direction: column;
+  
+
+
+}
+
+/* FOR HEADER */
+  
+.header{
+    width: 100%;
+    padding: 0.4rem;
+    height: 4.5rem;
+    box-sizing: border-box;
+    background-color: #343b33dd;
+    background-repeat: repeat-x;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+  
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.logo-img{
+    width: 300px;
+    height: 80%;
+}
+
+.search{
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.se-input:focus{
+    background: #67876415;
+    box-shadow: 0px 6px 39px 0px rgba(231, 231, 231, 0.645);
+    transition: 0.1s;
+}
+.se-input:hover{
+    background: #67876415;
+    box-shadow: 0px 6px 39px 0px rgba(231, 231, 231, 0.645);
+    transition: 0.1s;
+}
+
+.se-input{
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    height: 65%;
+    width: 350px;
+    border-radius: 1rem 1rem 1rem 1rem;
+    background: #6787646b;
+}
+
+.header-icons{
+    width: 30rem; 
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    align-items: center;
+    
+}
+
+.header-btn {
+    width: 70px;
+    height: 40px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: #668663;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+}
+
+.header-btn:hover{
+    height: 50px;
+    outline: none;
+    background: #b6d9b3;
+    box-shadow: 0px 6px 39px 0px rgba(231, 231, 231, 0.645);
+    transition: 0.1s;
+}
+.header-btn:focus{
+    height: 50px;
+    outline: none;
+}
+
+.acc-icon{
+    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    box-sizing: border-box;
+    box-shadow: none;
+    background: #668663;
+
+}
+
+
+.acc-dpdown{
+    background: #668663;
+    box-sizing: border-box;
+    width: 60px;
+}
+.dropdown-item{
+    box-sizing: border-box;
+    font-size: 0.8rem;
+}
+
+
+
+
+/* Section One */
+
+.section-one{
+    flex: 1;
+    box-sizing: border-box;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background-color: rgba(222, 222, 222, 0.955);
+}
+
+.secone-header{
+    font-family: "Madimi One", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-btn{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 130px;
+    /* position: sticky;
+    top: 70px; */
+  
+ 
+
+}
+
+
+.secone-div3{
+    margin-top: 1rem;
+    box-sizing: border-box;
+    margin-left: 1px;
+    overflow: scroll;
+    overflow-x: hidden;
+
+    height:400px;
+}
+
+.orphanages{
+ display: flex;
+ gap: 2rem;
+ flex-wrap: wrap;
+ height: 380px;
+ overflow-y: scroll;
+
+
+}
+
+/* Orphanage Deatails Card */
+.orp-detailcard{
+    border: #668663;
+    border-width: 2px;
+    border-style: solid;
+    padding: 15px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    gap: 6px;
+    background-color: rgba(255, 255, 255, 0.84);
+    width: 560px;
+    border-radius: 20px;
+    box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+    -webkit-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+    -moz-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+    
+}
+
+.orp-bio{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    width: 350px;
+    height: 200px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    /* background: #668663; */
+
+}
+
+.oprcard-head{
+    font-family: "Madimi One", sans-serif;
+}
+
+.orpcard-footer{
+    height: 25px;
+    font-size: 12px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 34px;
+    font-family: "Madimi One", sans-serif;
+    color: rgb(104, 104, 104);
+}
+
+.orp-card-btns{
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-style: double;
+    border-width: 3px;
+    border-color: #668663;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+
+
+/* Orphange Campaign Card */
+
+.campaigns{
+    padding-top: 140px;
+}
+
+.orp-campaigncard{
+    width: 490px;
+    height: 300px;
+    border-width: 3px;
+    border-radius: 35px;
+    border: 3px solid #b6d9b3;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 10px;
+    background-color: white;
+}
+
+.orp-campaigncard-divone{
+    border-radius: 38px;
+    width: 180px;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+    -webkit-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+    -moz-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+}
+.campaign-img{
+    width: 600px;
+}
+
+.cp-det-header{
+    font-family: "Madimi One", sans-serif;
+    font-size: 22px;
+}
+
+.campaign-card-bio{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    overflow: hidden;
+    height: 150px;
+    width: 250px;
+  
+
+}
+
+.orp-cpcard-divtwo{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    
+    
+}
+
+.cp-det-btn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cpcd-dnt{
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 74px;
+    height: 30px;
+    outline: none;
+    border-radius: 7px;
+   font-size: 12px;
+}

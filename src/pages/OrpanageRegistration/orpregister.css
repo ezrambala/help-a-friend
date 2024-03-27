@@ -1,0 +1,54 @@
+
+.orp-register-div{
+    min-width: 1250px;
+    display: flex;
+    justify-content: center;
+    padding: 13px;
+}
+.orp-register-form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    
+}
+
+.orp-form-header{
+    background-color: #a7ffa1fe;
+    border-radius: 10px;
+    font-family: "Madimi One", sans-serif;
+    width:98%;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+}
+
+.orp-reg-input{
+    outline: none;
+    border-radius: 7px;
+    border: 1.5px dashed #73d768;
+    font-size: 13px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+.orp-input-div{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    box-sizing: border-box;
+    color: #3d5a3b;
+}
+
+.orp-regisster-submit{
+    outline: none;
+    background-color: #73d768;
+    border-radius: 12px;
+    border: 1px #173b13 dashed;
+    height: 40px;
+    width: 80px;
+}
