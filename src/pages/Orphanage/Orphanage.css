@@ -17,6 +17,7 @@
     display: flex;
     position: sticky;
     top: 0;
+    z-index: 100;
 
     justify-content: space-between;
     align-items: center;
@@ -213,9 +214,14 @@
 }
 
 /* Section 2 */
-
+.header-two-font{
+    font-family: "Madimi One", sans-serif;
+}
 .two-section-two{
     margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
 }
 
 .two-orp-img-list{
@@ -234,4 +240,37 @@
     background-color: #b6d9b3;
     transition: 0.3s;
   
+}
+
+.liv-cn-gender-dis{
+    display: flex;
+    justify-content: space-between;
+}
+
+.orp-living-con{
+    background-color: rgba(255, 255, 255, 0.833);
+    width: 500px;
+    height: 300px;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    overflow: auto;
+    overflow-wrap: break-word;
+}
+
+.orp-spe-needs{
+    background-color: rgba(255, 255, 255, 0.833);
+    width: 500px;
+    height: 300px;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    overflow: auto;
+    overflow-wrap: break-word;
+}
+
+.back-logo-image{
+    background-image: url("../../images/helpafriendtransperent.png");
+    background-position-x: center;
+    background-position-y: -260px;
+    width: fit-content;
+    
 }

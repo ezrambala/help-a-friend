@@ -21,9 +21,17 @@ export default function OrpRegister() {
     speNeedsDescrip: "",
   });
 
+  
+  
+
+  // const dte = curDate.toDateString();
+  // console.log(dte);
+
   function handleSubmitForm(event) {
     event.preventDefault();
     console.log(formInfo);
+    const curDate = new Date();
+    const displayDate = curDate.getDate() + '/' + (curDate.getMonth() + 1) + '/' + curDate.getFullYear();
 
     addDoc(collection(db, "orphanages"), {
       name: formInfo.name,
@@ -31,11 +39,11 @@ export default function OrpRegister() {
       manager_name: formInfo.manager,
       phone_number: formInfo.phone,
       email: formInfo.email,
-      num_of_children: formInfo.numOfChild,
-      num_of_female_children: formInfo.femaleChild,
-      num_of_male_children: formInfo.maleChild,
-      num_of_residents: formInfo.totalRes,
-      num_of_staff: formInfo.staffnum,
+      num_of_children: parseInt(formInfo.numOfChild),
+      num_of_female_children: parseInt(formInfo.femaleChild),
+      num_of_male_children: parseInt(formInfo.maleChild),
+      num_of_residents: parseInt(formInfo.totalRes),
+      num_of_staff: parseInt(formInfo.staffnum),
       orphanage_biography: formInfo.orpBio,
       living_condition: formInfo.livingCon,
       special_needs_description: formInfo.speNeedsDescrip,

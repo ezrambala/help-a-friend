@@ -9,8 +9,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import imglogo from "../../images/logo.png"
-import orpcamimg from "../../images/orphanagecampaign.jpg"
+import imglogo from "../../images/logo.png";
+import orpcamimg from "../../images/orphanagecampaign.jpg";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -28,15 +28,13 @@ export default function Dashboard() {
       const allOrphanages = await getDocs(collection(db, "orphanages"));
       const orphanageData = allOrphanages.docs.map((doc) => ({
         ...doc.data(),
-        id: doc.id
+        id: doc.id,
       }));
       setOrphanageList(orphanageData);
       console.log(allOrphanages);
     };
     getOrphanages();
   }, []);
-
-
 
   return (
     <div className="pagecontent">
@@ -106,7 +104,9 @@ export default function Dashboard() {
         </div>
         <div className="nav-btn">
           <button className="cssbuttons-io">
-            <span>Orphanages</span>
+            <span>
+              <a href="#orphanages">Orphanages</a>
+            </span>
           </button>
           <button className="cssbuttons-io">
             <span>
@@ -115,20 +115,15 @@ export default function Dashboard() {
           </button>
         </div>
         <div className="secone-div3">
-          <div className="orphanages">
-            {orphanageList.map((orpl) =>(
+          <div id="orphanages" className="orphanages">
+            {orphanageList.map((orpl) => (
               <div className="orp-detailcard">
                 <div>
-                   
-                  <Link to={ "orphanage/" + orpl.id}>
-                    <h3 className="oprcard-head">
-                      {orpl.name}
-                    </h3>
+                  <Link to={"orphanage/" + orpl.id}>
+                    <h3 className="oprcard-head">{orpl.name}</h3>
                   </Link>
-                
-                  <div className="orp-bio">
-                    {orpl.orphanage_biography}
-                  </div>
+
+                  <div className="orp-bio">{orpl.orphanage_biography}</div>
                   <div className="orpcard-footer">
                     <p>{orpl.num_of_residents} Residents!</p>
                     <p>
@@ -173,14 +168,17 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-            ))
-            }
+            ))}
           </div>
 
           <div id="campaigns" className="campaigns">
             <div className="orp-campaigncard">
               <div className="orp-campaigncard-divone">
-              <img className="campaign-img" src={orpcamimg} alt="hey, there"></img>
+                <img
+                  className="campaign-img"
+                  src={orpcamimg}
+                  alt="hey, there"
+                ></img>
               </div>
 
               <div className="orp-cpcard-divtwo">

@@ -7,9 +7,11 @@ import Chatsvg from "../../svg/Chatsvg";
 import UserIcon from "../../svg/UserIcon";
 import imglogo from "../../images/logo.png";
 import orpimage from "../../images/NIGERIA-SCHOOL-ORPHANS.jpg";
+import { Chart } from "react-google-charts";
 import DonateSvg from "../../svg/DonateSvg";
 import ExcSvg from "../../svg/ExcSvg";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/Spinner";
 
 export default function Orphanage() {
   const navigate = useNavigate();
@@ -17,22 +19,40 @@ export default function Orphanage() {
   const params = useParams();
   const orphanageId = params.orphanageid;
   console.log("this is the params" + orphanageId);
-  console.log(searchParams.get("q"));
-  const [orphanageList, setOrphanageList] = useState([]);
+
+  const [orphanageList, setOrphanageList] = useState(null);
+  const [pieChartInfo, setPieChartInfo] = useState(null);
+
+  const getOrphanages = async () => {
+    console.log("getting orphanageList...");
+
+    const allOrphanages = await getDoc(doc(db, "orphanages", orphanageId));
+    if (allOrphanages.exists()) {
+      const orphanageData = allOrphanages.data();
+      console.log(orphanageData.num_of_male_children);
+      console.log(orphanageData.num_of_female_children);
+      setPieChartInfo([
+        ["Task", "Hours per Day"],
+        ["Boys", orphanageData.num_of_male_children],
+        ["Girls", orphanageData.num_of_female_children],
+      ]);
+      setOrphanageList(orphanageData);
+    } else {
+      navigate("/");
+    }
+  };
+
   useEffect(() => {
-    const getOrphanages = async () => {
-      const allOrphanages = await getDoc(doc(db, "orphanages", orphanageId));
-      if (allOrphanages.exists()) {
-        const orphanageData = allOrphanages.data();
-        setOrphanageList(orphanageData);
-      } else {
-        navigate("/");
-      }
-    };
     getOrphanages();
+    // console.log("hello");
   }, []);
 
-  console.log(orphanageList);
+  const optionsChart = {
+    title: "Gender Distribution",
+    is3D: true,
+  };
+
+  if (!pieChartInfo) return <Spinner />;
 
   return (
     <div className="two-pagecontent">
@@ -70,13 +90,13 @@ export default function Orphanage() {
                 className="dropdown-menu acc-dpdown"
                 aria-labelledby="dropdownMenuButton"
               >
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="">
                   Action
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="">
                   Another action
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="">
                   Something else here
                 </a>
               </div>
@@ -118,14 +138,45 @@ export default function Orphanage() {
       </section>
 
       <section className="two-section-two">
-        <h2>Photos</h2>
-        <div className="two-orp-img-list">
-          <div>
-            <div className="two-orp-img-one">
-              <img width="600px" alt="img" src={orpimage}></img>
+        <div>
+          <h2 className="header-two-font">Photos</h2>
+          <div className="two-orp-img-list">
+            <div>
+              <div className="two-orp-img-one">
+                <img width="600px" alt={orpimage} src={orpimage}></img>
+              </div>
             </div>
           </div>
         </div>
+        <div>
+          <h2 className="header-two-font">Living Conditions</h2>
+          <div className="liv-cn-gender-dis">
+            <div className="back-logo-image">
+              <div className="orp-living-con">
+                {orphanageList.living_condition}
+              </div>
+            </div>
+            <div className="gender-distribution">
+              <Chart
+                chartType="PieChart"
+                data={pieChartInfo}
+                options={optionsChart}
+                width={"500px"}
+                height={"300px"}
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 className="header-two-font">Special Needs Cases</h2>
+          <div className="back-logo-image">
+            <div className="orp-spe-needs">
+              {orphanageList.special_needs_description}
+            </div>
+          </div>
+        </div>
+        <h2 className="header-two-font">Campaigns</h2>
+        <div></div>
       </section>
     </div>
   );
