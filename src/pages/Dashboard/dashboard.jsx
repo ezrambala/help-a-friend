@@ -93,12 +93,7 @@ export default function Dashboard() {
                 <Link className="dropdown-item" to={"todonate/" + user?.uid}>
                   To Donate List
                 </Link>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
+                
               </div>
             </div>
           </div>
@@ -144,10 +139,9 @@ export default function Dashboard() {
                     <button
                       className="CartBtn"
                       onClick={() => {
-                        const tdlId = user.uid + 1;
                         setDoc(
                           doc(db, "ToDonateList", user.uid),
-                          { [tdlId]: orpl.id },
+                          { [orpl.id]: orpl.id },
                           { merge: true }
                         );
                       }}

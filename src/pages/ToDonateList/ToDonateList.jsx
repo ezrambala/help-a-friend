@@ -7,22 +7,42 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import Header from "../../components/Header";
 
 export default function ToDonateList() {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const params = useParams();
   const userId = params.userid;
+  const [orphanageList, setOrphanageList] = useState([]);
 
-  const [toDonateList, setToDonateList] = useState(null);
-  const [orphanageList, setOrphanageList] = useState(null);
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      console.log(firebaseUser);
+      setUser(firebaseUser);
+    });
+  }, []);
+
   const getToDonateList = async () => {
     const ToDonate = await getDoc(doc(db, "ToDonateList", userId));
     if (ToDonate.exists()) {
-      const ToDonateData = [ToDonate.data()];
-      setToDonateList(ToDonateData);
-      console.log(ToDonateData);
-      const orphanageData = ToDonateData.map((orpl) => {
-        console.log("wee");
+      const ToDonateData = ToDonate.data();
+      console.log(Object.values(ToDonateData));
+      const ToDonateDataAsList = Object.values(ToDonateData);
+
+      const orphanageDataPromises = ToDonateDataAsList.map(async (orpl) => {
+        return getDoc(doc(db, "orphanages", orpl));
+      });
+      Promise.all(orphanageDataPromises).then((orphanageData) => {
+        console.log(orphanageData);
+        const allorphanages = orphanageData.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setOrphanageList(allorphanages);
+        console.log(allorphanages);
       });
     } else {
       navigate("/");
@@ -31,72 +51,15 @@ export default function ToDonateList() {
 
   useEffect(() => {
     getToDonateList();
+    console.log(orphanageList);
   }, []);
 
   return (
     <div className="tdl-page-container">
-      <div className="two-header">
-        <div className="two-logo">
-          <img src={imglogo} alt="logo" className="two-logo-img"></img>
-        </div>
-
-        <div className="two-header-icons">
-          <div>
-            <div className="orphanage-login-icon dp-heading-font-family">
-              LOGIN
-            </div>
-          </div>
-
-          <div>
-            <div className="orphanage-login-icon dp-heading-font-family">
-              SIGN-UP
-            </div>
-          </div>
-
-          <div>
-            <ChatsvgGreen height={"44px"} width={"44px"} />
-          </div>
-
-          <div>
-            <div className="orphanage-login-icon dp-heading-font-family">
-              DONATE
-            </div>
-          </div>
-
-          <div>
-            <div className="dropdown">
-              <button
-                className="btn btn-secondary  acc-icon"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <UserIcon width={"34px"} height={"34px"} />
-              </button>
-              <div
-                className="dropdown-menu acc-dpdown"
-                aria-labelledby="dropdownMenuButton"
-              >
-                <a className="dropdown-item" href="">
-                  Action
-                </a>
-                <a className="dropdown-item" href="">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="">
-                  Something else here
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <Header userId={user?.uid} />
       <div className="tdl-section-one">
         <div>
-          <h2 className="tdl-page-heading">Hey Ezra</h2>
+          <h2 className="tdl-page-heading">{"Hey " + user?.displayName}</h2>
         </div>
         <div>
           <h3 className="dp-heading-font-family">Your To-Donate List</h3>
@@ -104,19 +67,23 @@ export default function ToDonateList() {
             This is a Bookmark of all the orphanages you wish To-Donate To
           </h6>
         </div>
-        <div className="tdl-card">
-          <div className="to-donate-to">
-            <h5 className="tdl-card-numbering dp-heading-font-family">1</h5>
-            <div className="tdt-content">
-              <h4>Light Of Lugbe</h4>
-              <div>Address</div>
-            </div>
-            <div className="tdt-content-two">
-              <div className="tdt-link">Donate</div>
-              <div className="tdt-link">Remove</div>
+        {orphanageList.map((orpl, index) => (
+          <div className="tdl-card">
+            <div className="to-donate-to">
+              <h5 className="tdl-card-numbering dp-heading-font-family">
+                {index + 1}
+              </h5>
+              <div className="tdt-content">
+                <h4>{orpl.name}</h4>
+                <div style={{ fontSize: "12px" }}>{orpl.address}</div>
+              </div>
+              <div className="tdt-content-two">
+                <div className="tdt-link">Donate</div>
+                <div className="tdt-link">Remove</div>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

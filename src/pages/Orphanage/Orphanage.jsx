@@ -12,8 +12,12 @@ import DonateSvg from "../../svg/DonateSvg";
 import ExcSvg from "../../svg/ExcSvg";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner";
+import Header from "../../components/Header";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
 
 export default function Orphanage() {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const params = useParams();
   const orphanageId = params.orphanageid;
@@ -21,6 +25,13 @@ export default function Orphanage() {
 
   const [orphanageList, setOrphanageList] = useState(null);
   const [pieChartInfo, setPieChartInfo] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      console.log(firebaseUser);
+      setUser(firebaseUser);
+    });
+  }, []);
 
   const getOrphanages = async () => {
     console.log("getting orphanageList...");
@@ -55,7 +66,7 @@ export default function Orphanage() {
 
   return (
     <div className="two-pagecontent">
-      <div className="two-header">
+      {/* <div className="two-header">
         <div className="two-logo">
           <img src={imglogo} alt="logo" className="two-logo-img"></img>
         </div>
@@ -112,7 +123,8 @@ export default function Orphanage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      <Header userId={user?.uid}/>
 
       <section className="two-section-one">
         <div className="two-secone-divone">

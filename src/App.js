@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Dashboard from "./pages/Dashboard/dashboard";
 import Orphanage from "./pages/Orphanage/Orphanage";
