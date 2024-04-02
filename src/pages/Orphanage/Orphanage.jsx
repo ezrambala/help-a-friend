@@ -3,7 +3,7 @@ import "./Orphanage.css";
 import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import Chatsvg from "../../svg/Chatsvg";
+import ChatsvgGreen from "../../svg/ChatsvgGreen";
 import UserIcon from "../../svg/UserIcon";
 import imglogo from "../../images/logo.png";
 import orpimage from "../../images/NIGERIA-SCHOOL-ORPHANS.jpg";
@@ -15,7 +15,6 @@ import Spinner from "../../components/Spinner";
 
 export default function Orphanage() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const params = useParams();
   const orphanageId = params.orphanageid;
   console.log("this is the params" + orphanageId);
@@ -63,15 +62,25 @@ export default function Orphanage() {
 
         <div className="two-header-icons">
           <div>
-            <button className="two-header-btn">LOGIN</button>
+            <div className="orphanage-login-icon dp-heading-font-family">
+              LOGIN
+            </div>
           </div>
 
           <div>
-            <button className="two-header-btn">SIGN-UP</button>
+            <div className="orphanage-login-icon dp-heading-font-family">
+              SIGN-UP
+            </div>
           </div>
 
           <div>
-            <Chatsvg height={"34px"} width={"34px"} />
+            <ChatsvgGreen height={"44px"} width={"44px"} />
+          </div>
+
+          <div>
+            <div className="orphanage-login-icon dp-heading-font-family">
+              DONATE
+            </div>
           </div>
 
           <div>
@@ -101,10 +110,6 @@ export default function Orphanage() {
                 </a>
               </div>
             </div>
-          </div>
-
-          <div>
-            <DonateSvg height={"34px"} width={"34px"} />
           </div>
         </div>
       </div>

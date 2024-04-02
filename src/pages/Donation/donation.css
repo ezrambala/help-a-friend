@@ -1,0 +1,64 @@
+
+.dp-main-section{
+    display: flex;
+    justify-content: center;
+    gap: 52px;
+    min-width: 1250px;
+    margin-top: 40px;
+}
+.dp-section-one{
+    width: 350px;
+    height: 500px;
+    box-sizing: border-box;   
+}
+
+.dp-haf-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 350px;
+    height: 200px;
+}
+
+.dp-haf-bio{
+    font-size: 18px;
+    margin-top: 20px;
+    width: 300px;
+}
+
+
+.dp-section-two{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 500px;
+    width: 500px;
+    
+}
+
+.dp-heading-font-family{
+    font-family: "Madimi One", sans-serif;
+}
+
+.dp-input{
+    outline: none;
+    height:35px;
+    border-radius: 0px;
+    border: 1px solid;
+}
+
+.dp-submit{
+    background-color: #688865;
+    border: none;
+    outline: none;
+    height: 35px;
+}
+
+.dashed-border{
+    border: dashed 1px;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    color: #688865d2;
+}

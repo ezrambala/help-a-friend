@@ -11,6 +11,7 @@
     box-sizing: border-box;
     height: fit-content;
     min-width: 1250px;
+    max-width: 1500px;
     display: flex;
     flex-direction: column;
   
@@ -25,7 +26,7 @@
     padding: 0.4rem;
     height: 4.5rem;
     box-sizing: border-box;
-    background-color: #343b33dd;
+    background-color: #343b33f9;
     background-repeat: repeat-x;
     display: flex;
     position: sticky;
@@ -34,6 +35,10 @@
 
     justify-content: space-between;
     align-items: center;
+
+    box-shadow: 12px 14px 18px 1px rgba(171,171,171,0.75);
+    -webkit-box-shadow: 12px 14px 18px 1px rgba(171,171,171,0.75);
+    -moz-box-shadow: 12px 14px 18px 1px rgba(171,171,171,0.75);
 }
 
 .logo{
@@ -72,23 +77,32 @@
     border: none;
     outline: none;
     height: 65%;
-    width: 350px;
+    width: 250px;
     border-radius: 1rem 1rem 1rem 1rem;
     background: #6787646b;
 }
 
+.dashboard-login-icon{
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
 .header-icons{
-    width: 30rem; 
+    width: fit-content; 
     height: 50px;
     box-sizing: border-box;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 3rem;
     align-items: center;
     
 }
 
-.header-btn {
+/* .header-btn {
     width: 70px;
     height: 40px;
     color: white;
@@ -113,7 +127,7 @@
 .header-btn:focus{
     height: 50px;
     outline: none;
-}
+} */
 
 .acc-icon{
     width: 65px;
@@ -130,8 +144,9 @@
 
 .acc-dpdown{
     background: #668663;
-    box-sizing: border-box;
     width: 60px;
+    margin-right: 100px;
+    margin-top: 20px;
 }
 .dropdown-item{
     box-sizing: border-box;

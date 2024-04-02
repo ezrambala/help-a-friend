@@ -7,7 +7,7 @@ import ExcSvg from "../../svg/ExcSvg";
 import UserIcon from "../../svg/UserIcon";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import imglogo from "../../images/logo.png";
 import orpcamimg from "../../images/orphanagecampaign.jpg";
@@ -53,15 +53,25 @@ export default function Dashboard() {
         </div>
         <div className="header-icons">
           <div>
-            <button className="header-btn">LOGIN</button>
+            <div className="dp-heading-font-family dashboard-login-icon">
+              LOGIN
+            </div>
           </div>
 
           <div>
-            <button className="header-btn">SIGN-UP</button>
+            <div className="dp-heading-font-family dashboard-login-icon">
+              SIGN-UP
+            </div>
           </div>
 
           <div>
-            <Chatsvg height={"34px"} width={"34px"} />
+            <Chatsvg height={"44px"} width={"44px"} />
+          </div>
+
+          <div>
+            <div className="dp-heading-font-family dashboard-login-icon">
+              DONATE
+            </div>
           </div>
 
           <div>
@@ -77,12 +87,12 @@ export default function Dashboard() {
                 <UserIcon height={"34px"} width={"34px"} />
               </button>
               <div
-                className="dropdown-menu acc-dpdown"
+                className="acc-dpdown dropdown-menu "
                 aria-labelledby="dropdownMenuButton"
               >
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
+                <Link className="dropdown-item" to={"todonate/" + user?.uid}>
+                  To Donate List
+                </Link>
                 <a className="dropdown-item" href="#">
                   Another action
                 </a>
@@ -91,10 +101,6 @@ export default function Dashboard() {
                 </a>
               </div>
             </div>
-          </div>
-
-          <div>
-            <DonateSvg height={"34px"} width={"34px"} />
           </div>
         </div>
       </div>
@@ -135,7 +141,17 @@ export default function Dashboard() {
 
                 <div className="orp-card-btns">
                   <div>
-                    <button className="CartBtn">
+                    <button
+                      className="CartBtn"
+                      onClick={() => {
+                        const tdlId = user.uid + 1;
+                        setDoc(
+                          doc(db, "ToDonateList", user.uid),
+                          { [tdlId]: orpl.id },
+                          { merge: true }
+                        );
+                      }}
+                    >
                       <span className="IconContainer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
