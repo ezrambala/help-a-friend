@@ -76,6 +76,15 @@
     color: #668663;
     cursor: pointer;
 }
+.orphanage-login-dpdown{
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    cursor: pointer;
+
+}
 
 .two-header-icons{
     width: fit-content; 

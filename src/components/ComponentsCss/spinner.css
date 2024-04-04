@@ -1,0 +1,37 @@
+
+.spinner-container{
+    min-width: 1250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6rem;
+    width: fit-content;
+}
+
+.spinner-header{
+    margin-top: 20px;
+    
+}
+
+.spinner-tsec{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.tsechead{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+}

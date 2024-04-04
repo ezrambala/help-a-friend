@@ -6,6 +6,8 @@ import Login from "./pages/Login/Login";
 import OrpRegister from "./pages/OrpanageRegistration/OrpRegister";
 import Donation from "./pages/Donation/Donation";
 import ToDonateList from "./pages/ToDonateList/ToDonateList";
+import OrphanageNews from "./pages/OrphanageNews/OrphanageNews";
+import Spinner from "./components/Spinner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="donation" element={<Donation />} />
         <Route path="todonate/:userid" element={<ToDonateList />} />
+        <Route path="news" element={<OrphanageNews />} />
+        <Route path="spinner" element={<Spinner />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>

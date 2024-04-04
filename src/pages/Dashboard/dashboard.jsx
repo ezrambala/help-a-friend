@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import "./dashboard-extra.css";
-import Chatsvg from "../../svg/Chatsvg";
-import DonateSvg from "../../svg/DonateSvg";
 import ExcSvg from "../../svg/ExcSvg";
 import UserIcon from "../../svg/UserIcon";
 import { onAuthStateChanged } from "firebase/auth";
@@ -12,10 +10,13 @@ import { db } from "../../firebase/config";
 import imglogo from "../../images/logo.png";
 import orpcamimg from "../../images/orphanagecampaign.jpg";
 import { Link } from "react-router-dom";
+import OrphanageNews from "../OrphanageNews/OrphanageNews";
+import Spinner from "../../components/Spinner";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
-  const [orphanageList, setOrphanageList] = useState([]);
+  const [orphanageList, setOrphanageList] = useState(null);
+  const [capUsername, setCapUsername] = useState(null);
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
       console.log(firebaseUser);
@@ -35,14 +36,24 @@ export default function Dashboard() {
     };
     getOrphanages();
   }, []);
+  useEffect(() => {
+    if (user) {
+      const str = user?.displayName;
+      setCapUsername(capitalize(str));
+    }
+  }, [user]);
 
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  if (!orphanageList) return <Spinner />;
   return (
     <div className="pagecontent">
       <div className="header">
         <div className="logo">
           <img src={imglogo} alt="logo" className="logo-img"></img>
         </div>
-        <p className="text-white">{user?.displayName}</p>
 
         <div className="search">
           <input
@@ -52,25 +63,44 @@ export default function Dashboard() {
           ></input>
         </div>
         <div className="header-icons">
-          <div>
-            <div className="dp-heading-font-family dashboard-login-icon">
-              LOGIN
+          {user ? (
+            <div>
+              <div className="dp-heading-font-family dashboard-login-icon">
+                WELCOME &nbsp;&nbsp;&nbsp; {capUsername}
+              </div>
             </div>
+          ) : (
+            <>
+              <div>
+                <Link
+                  to={"/login"}
+                  className="dp-heading-font-family dashboard-login-icon"
+                >
+                  LOGIN
+                </Link>
+              </div>
+
+              <div>
+                <Link
+                  to={"/register"}
+                  className="dp-heading-font-family dashboard-login-icon"
+                >
+                  SIGN-UP
+                </Link>
+              </div>
+            </>
+          )}
+
+          <div>
+            {/* <Chatsvg height={"44px"} width={"44px"} /> */}
+            <Link className="dp-heading-font-family dashboard-login-icon">
+              FORUM
+            </Link>
           </div>
 
           <div>
             <div className="dp-heading-font-family dashboard-login-icon">
-              SIGN-UP
-            </div>
-          </div>
-
-          <div>
-            <Chatsvg height={"44px"} width={"44px"} />
-          </div>
-
-          <div>
-            <div className="dp-heading-font-family dashboard-login-icon">
-              DONATE
+              DONATIONS
             </div>
           </div>
 
@@ -90,19 +120,23 @@ export default function Dashboard() {
                 className="acc-dpdown dropdown-menu "
                 aria-labelledby="dropdownMenuButton"
               >
-                <Link className="dropdown-item" to={"todonate/" + user?.uid}>
+                <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family"
+                  to={"todonate/" + user?.uid}
+                >
                   To Donate List
                 </Link>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <section className="section-one">
         <div className="secone-header">
           <h2>Discover The World of Children In Need...</h2>
         </div>
+        <OrphanageNews />
         <div className="nav-btn">
           <button className="cssbuttons-io">
             <span>

@@ -31,14 +31,19 @@ export default function Header({ userId }) {
         </div>
 
         <div>
-          <ChatsvgGreen height={"44px"} width={"44px"} />
+          {/* <ChatsvgGreen height={"44px"} width={"44px"} /> */}
+          <Link
+            className="orphanage-login-icon dp-heading-font-family"
+          >
+            FORUM
+          </Link>
         </div>
 
-        {/* <div>
+        <div>
           <div className="orphanage-login-icon dp-heading-font-family">
-            DONATE
+            DONATIONS
           </div>
-        </div> */}
+        </div>
 
         <div>
           <div className="dropdown">
@@ -56,9 +61,10 @@ export default function Header({ userId }) {
               className="dropdown-menu acc-dpdown"
               aria-labelledby="dropdownMenuButton"
             >
-              <Link className="dropdown-item" to={"/todonate/" + userId}>
+              <Link className="orphanage-login-dpdown  dp-heading-font-family" to={"/todonate/" + userId}>
                 To Donate List
               </Link>
+              
             </div>
           </div>
         </div>
