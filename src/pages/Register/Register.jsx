@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import "./register.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
+  
   const [formInfo, setFormInfo] = useState({
     username: "",
     email: "",
@@ -18,7 +21,7 @@ export default function Register() {
       .then(() => {
         // after that, update the users username
         updateProfile(auth.currentUser, { displayName: formInfo.username })
-          .then(() => alert("User registered successfully!!"))
+          .then(() => {alert("User registered successfully!!");  navigate("/");})
           .catch((error) => console.log(error));
       })
       .catch((error) => {

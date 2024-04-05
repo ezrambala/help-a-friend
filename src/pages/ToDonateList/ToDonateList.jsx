@@ -19,8 +19,12 @@ export default function ToDonateList() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
-      console.log(firebaseUser);
-      setUser(firebaseUser);
+      if (firebaseUser) {
+        console.log(firebaseUser);
+        setUser(firebaseUser);
+      } else {
+        navigate("/");
+      }
     });
   }, []);
 
@@ -47,19 +51,18 @@ export default function ToDonateList() {
       navigate("/");
     }
   };
-  
+
   useEffect(() => {
-    if(user){
-      const testUser = () =>{
-      if (userIdtwo == userId) {
-        getToDonateList();
-      } 
-      else{
-        navigate("/");
-      }
-     }
-     testUser();
-    } 
+    if (user) {
+      const testUser = () => {
+        if (userIdtwo == userId) {
+          getToDonateList();
+        } else {
+          navigate("/");
+        }
+      };
+      testUser();
+    }
   }, [user]);
 
   if (!orphanageList) return <Spinner />;

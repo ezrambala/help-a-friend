@@ -211,6 +211,14 @@
     overflow-wrap: break-word;
 }
 
+.two-orp-sec-one-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    margin-top: 20px;
+}
+
 .two-orp-details{
     border: #b6d9b3 2px dashed;
     border-radius: 10px;
@@ -230,6 +238,11 @@
     padding: 5px 25px 5px 25px;   
     transition: 0.5s;
 
+}
+
+.link-removal-style{
+    text-decoration: none; 
+    color: inherit;
 }
 
 /* Section 2 */

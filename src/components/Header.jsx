@@ -1,10 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ChatsvgGreen from "../svg/ChatsvgGreen";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase/config";
+import { signOut } from "firebase/auth";
+
 import UserIcon from "../svg/UserIcon";
 import imglogo from "../images/logo.png";
 
 export default function Header({ userId }) {
+  const navigate = useNavigate();
+  function userLogout() {
+    signOut(auth)
+      .then(() => {
+        alert("user logged out");
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("there was an error");
+      });
+  }
+
   return (
     <div className="two-header">
       <div className="two-logo">
@@ -12,29 +26,33 @@ export default function Header({ userId }) {
       </div>
 
       <div className="two-header-icons">
-        <div>
-          <Link
-            to={"/login"}
-            className="orphanage-login-icon dp-heading-font-family"
-          >
-            LOGIN
-          </Link>
-        </div>
+        {userId ? (
+          <></>
+        ) : (
+          <>
+            <div>
+              <Link
+                to={"/login"}
+                className="dp-heading-font-family orphanage-login-icon"
+              >
+                LOGIN
+              </Link>
+            </div>
 
-        <div>
-          <Link
-            to={"/register"}
-            className="orphanage-login-icon dp-heading-font-family"
-          >
-            SIGN-UP
-          </Link>
-        </div>
+            <div>
+              <Link
+                to={"/register"}
+                className="dp-heading-font-family orphanage-login-icon"
+              >
+                SIGN-UP
+              </Link>
+            </div>
+          </>
+        )}
 
         <div>
           {/* <ChatsvgGreen height={"44px"} width={"44px"} /> */}
-          <Link
-            className="orphanage-login-icon dp-heading-font-family"
-          >
+          <Link className="orphanage-login-icon dp-heading-font-family">
             FORUM
           </Link>
         </div>
@@ -45,29 +63,42 @@ export default function Header({ userId }) {
           </div>
         </div>
 
-        <div>
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary  acc-icon"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <UserIcon width={"34px"} height={"34px"} />
-            </button>
-            <div
-              className="dropdown-menu acc-dpdown"
-              aria-labelledby="dropdownMenuButton"
-            >
-              <Link className="orphanage-login-dpdown  dp-heading-font-family" to={"/todonate/" + userId}>
-                To Donate List
-              </Link>
-              
+        {userId ? (
+          <div>
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary  acc-icon"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <UserIcon width={"34px"} height={"34px"} />
+              </button>
+              <div
+                className="dropdown-menu acc-dpdown"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family"
+                  to={"/todonate/" + userId}
+                >
+                 <div> To Donate List</div>
+                </Link>
+
+                <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family"
+                  onClick={userLogout}
+                >
+                  <div>Log Out</div>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
