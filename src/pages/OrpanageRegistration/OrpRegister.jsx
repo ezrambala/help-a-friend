@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./orpregister.css";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 export default function OrpRegister() {
+  const navigate = useNavigate();
   const [formInfo, setFormInfo] = useState({
     name: "",
     address: "",
@@ -47,9 +49,12 @@ export default function OrpRegister() {
       orphanage_biography: formInfo.orpBio,
       living_condition: formInfo.livingCon,
       special_needs_description: formInfo.speNeedsDescrip,
+      createdAt: serverTimestamp(),
     })
-      .then(() => {
+      .then((docRef) => {
         alert("Orphanage Registered");
+        alert(docRef.id);
+        navigate("/upload-orp-photos/" + docRef.id)
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -8,7 +8,9 @@ import Donation from "./pages/Donation/Donation";
 import ToDonateList from "./pages/ToDonateList/ToDonateList";
 import OrphanageNews from "./pages/OrphanageNews/OrphanageNews";
 import Spinner from "./components/Spinner";
+import UploadOrphanageProfilePhoto from "./components/UploadOrphanageProfilePhoto";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UploadOrphanagePhotos from "./components/UploadOrphanagePhotos";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="todonate/:userid" element={<ToDonateList />} />
         <Route path="news" element={<OrphanageNews />} />
         <Route path="spinner" element={<Spinner />} />
+        <Route path="upload-orp-profile-photo/:orphanageid" element={<UploadOrphanageProfilePhoto />} />
+        <Route path="upload-orp-photos/:orphanageid" element={<UploadOrphanagePhotos />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>

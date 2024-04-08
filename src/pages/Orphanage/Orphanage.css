@@ -4,7 +4,7 @@
 
 .two-pagecontent{
     min-width: 1250px;
-    max-width: 1500px;
+  
 }
 /* for header */
 
@@ -258,8 +258,13 @@
 
 .two-orp-img-list{
     padding: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x:scroll;
+    
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 1100px;
+    height: 350px;
 }
 
 .two-orp-img-one{
@@ -268,10 +273,14 @@
     border-radius: 5px;
     overflow: hidden;
     width: 250px;
-    height: 200px;
+    height: 250px;
     background-color: #b6d9b3;
-    transition: 0.3s;
-  
+    transition:1s;
+}
+
+.two-orp-img-one:hover{
+    z-index: 120;
+    transform: scale(1.2) translateY(-10px);
 }
 
 .liv-cn-gender-dis{

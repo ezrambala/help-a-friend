@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Orphanage.css";
-import { useParams } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import orpimage from "../../images/NIGERIA-SCHOOL-ORPHANS.jpg";
 import { Chart } from "react-google-charts";
 import ExcSvg from "../../svg/ExcSvg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import Header from "../../components/Header";
 import { onAuthStateChanged } from "firebase/auth";
@@ -23,6 +22,7 @@ export default function Orphanage() {
   const [orphanageList, setOrphanageList] = useState(null);
   const [pieChartInfo, setPieChartInfo] = useState(null);
   const [testConnection, setTestConnection] = useState(false);
+  const [imgSrc, setImgSrc] = useState(orpimage);
   console.log("this is the params" + orphanageId);
 
   useEffect(() => {
@@ -41,6 +41,9 @@ export default function Orphanage() {
           const orphanageData = allOrphanages.data();
           console.log(orphanageData.num_of_male_children);
           console.log(orphanageData.num_of_female_children);
+          if (orphanageData.orphanage_profile_photo) {
+            setImgSrc(orphanageData.orphanage_profile_photo);
+          }
           setPieChartInfo([
             ["Task", "Hours per Day"],
             ["Boys", orphanageData.num_of_male_children],
@@ -88,7 +91,7 @@ export default function Orphanage() {
                 <div className="two-secone-divone">
                   <div>
                     <div className="two-orp-img">
-                      <img src={orpimage} alt=""></img>
+                      <img src={imgSrc} alt="no imge"></img>
                     </div>
                   </div>
                   <div className="two-about-orp">
@@ -153,7 +156,10 @@ export default function Orphanage() {
                     {orphanageList.address}
                     <ExcSvg />
                   </div>
-                  <a href={"mailto:" + orphanageList.email} className="two-orp-address link-removal-style">
+                  <a
+                    href={"mailto:" + orphanageList.email}
+                    className="two-orp-address link-removal-style"
+                  >
                     {orphanageList.email}
                     <EmailIcon />
                   </a>
@@ -169,13 +175,25 @@ export default function Orphanage() {
 
               <section className="two-section-two">
                 <div>
-                  <h2 className="header-two-font">Photos</h2>
+                  {orphanageList.orphanage_photos && (
+                    <h2 className="header-two-font">Photos</h2>
+                  )}
+
                   <div className="two-orp-img-list">
-                    <div>
-                      <div className="two-orp-img-one">
-                        <img width="600px" alt={orpimage} src={orpimage}></img>
-                      </div>
-                    </div>
+                    {orphanageList.orphanage_photos &&
+                      Object.values(orphanageList.orphanage_photos).map(
+                        (photos) => (
+                          <div>
+                            <div className="two-orp-img-one">
+                              <img
+                                width="600px"
+                                alt={photos}
+                                src={photos}
+                              ></img>
+                            </div>
+                          </div>
+                        )
+                      )}
                   </div>
                 </div>
                 <div>
