@@ -11,6 +11,7 @@ import Spinner from "./components/Spinner";
 import UploadOrphanageProfilePhoto from "./components/UploadOrphanageProfilePhoto";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadOrphanagePhotos from "./components/UploadOrphanagePhotos";
+import Forum from "./pages/Forum/Forum";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="spinner" element={<Spinner />} />
         <Route path="upload-orp-profile-photo/:orphanageid" element={<UploadOrphanageProfilePhoto />} />
         <Route path="upload-orp-photos/:orphanageid" element={<UploadOrphanagePhotos />} />
+        <Route path="forum" element={<Forum />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>

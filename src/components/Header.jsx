@@ -6,6 +6,7 @@ import { signOut } from "firebase/auth";
 import UserIcon from "../svg/UserIcon";
 import imglogo from "../images/logo.png";
 
+//uses orphanage.css classes
 export default function Header({ userId }) {
   const navigate = useNavigate();
   function userLogout() {
