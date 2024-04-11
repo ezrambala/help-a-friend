@@ -5,17 +5,31 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase/config";
 import { setDoc, doc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/config";
+import { updateProfile } from "firebase/auth";
+import Spinner from "./Spinner";
 import "./ComponentsCss/uploadorphanagephotos.css";
 
-function UploadOrphanageProfilePhoto() {
+function UploadUserProfilePhoto() {
+  const [user, setUser] = useState(null);
   const [imgUrl, setImgUrl] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
   const [uploadToDb, setUploadtoDb] = useState(false);
   const [buttonState, setButtonState] = useState(false);
   const navigate = useNavigate();
-  const params = useParams();
-  const orphanageId = params.orphanageid;
-  const fileEName = "orphanag-profile-photo";
+  const fileEName = "user-profile-photo";
+  const userId = user?.uid;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+      } else {
+        navigate("/");
+      }
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     setButtonState(true);
@@ -24,7 +38,7 @@ function UploadOrphanageProfilePhoto() {
     if (!file) return;
     const storageRef = ref(
       storage,
-      `photos/orphanagePhotos/${orphanageId}/profile-photo/${fileEName}`
+      `photos/userPhotos/${userId}/profile-photo/${fileEName}`
     );
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -50,24 +64,32 @@ function UploadOrphanageProfilePhoto() {
   };
   useEffect(() => {
     if (uploadToDb) {
-      const storePhotourl = async () => {
-        await setDoc(
-          doc(db, "orphanages", orphanageId),
-          {
-            orphanage_profile_photo: imgUrl,
-          },
-          { merge: true }
-        );
-        alert("image uploaded");
-      };
-      storePhotourl();
+      updateProfile(auth.currentUser, { photoURL: imgUrl })
+          .then(() => {
+            const storeUserPhoto = async () => {
+              await setDoc(
+                doc(db, "Users", userId),
+                {
+                  photoUrl: imgUrl,
+                },
+                { merge: true }
+              );
+              alert("Photo Stored Successfully"); 
+              navigate("/")
+            };
+            storeUserPhoto();
+            })
+          .catch((error) => console.log(error));
     }
   }, [uploadToDb]);
+
+  if(!user){return <Spinner/>}
+
   //this file and upload orphanage photos use the same css classes
   return (
     <div className="uploadmul-container">
       <h2 className="dp-heading-font-family upload-img-header">
-        Upload Your Orphanage Profile Photo
+        Upload Your Profile Photo
       </h2>
       <form onSubmit={handleSubmit} className="upload-mul-pic-form">
         <input type="file" accept=".jpeg,.jpg"  className="dp-heading-font-family" />
@@ -89,4 +111,4 @@ function UploadOrphanageProfilePhoto() {
     </div>
   );
 }
-export default UploadOrphanageProfilePhoto;
+export default UploadUserProfilePhoto;

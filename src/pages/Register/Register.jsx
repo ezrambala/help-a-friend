@@ -3,6 +3,8 @@ import "./register.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase/config";
+import { setDoc, doc } from "firebase/firestore"
 
 export default function Register() {
   const navigate = useNavigate();
@@ -14,14 +16,27 @@ export default function Register() {
   });
   function handleSubmitForm(event) {
     event.preventDefault();
-    console.log(formInfo);
 
     // create User With Email And Password
     createUserWithEmailAndPassword(auth, formInfo.email, formInfo.password)
-      .then(() => {
+      .then((userCredential) => {
+        const userIden = userCredential.user.uid;
         // after that, update the users username
         updateProfile(auth.currentUser, { displayName: formInfo.username })
-          .then(() => {alert("User registered successfully!!");  navigate("/");})
+          .then(() => {
+            const storeUsername = async () => {
+              await setDoc(
+                doc(db, "Users", userIden),
+                {
+                  displayName: formInfo.username,
+                },
+                { merge: true }
+              );
+              alert("User registered successfully!!");
+              navigate("/upload-user-profile-photo")
+            };
+            storeUsername();
+             })
           .catch((error) => console.log(error));
       })
       .catch((error) => {

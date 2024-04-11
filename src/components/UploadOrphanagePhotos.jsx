@@ -13,6 +13,7 @@ export default function UploadOrphanagePhotos() {
   //and img url is so that i can count when the urls are up to 5 and render particular codes
   // const [imgUrlAsList, setImgUrlAsList] = useState({});
   const [progresspercent, setProgresspercent] = useState(0);
+  const [buttonState, setButtonState] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const orphanageId = params.orphanageid;
@@ -32,6 +33,7 @@ export default function UploadOrphanagePhotos() {
   };
 
   const handleUpload = (event) => {
+    setButtonState(true);
     event.preventDefault();
 
     if (selectedFiles.length == 5 && imgUrl < 6) {
@@ -113,8 +115,8 @@ export default function UploadOrphanagePhotos() {
         onChange={handleFileChange}
         className="upload-mul-pic-form"
       >
-        <input type="file" multiple className="dp-heading-font-family" />
-        <button className="um-upload-btn dp-heading-font-family" type="submit">
+        <input type="file" accept=".jpeg,.jpg" multiple className="dp-heading-font-family" />
+        <button className="um-upload-btn dp-heading-font-family" type="submit"  disabled={buttonState}>
           Upload
         </button>
       </form>

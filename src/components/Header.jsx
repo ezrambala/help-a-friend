@@ -83,7 +83,7 @@ export default function Header({ userId }) {
               >
                 <Link
                   className="orphanage-login-dpdown  dp-heading-font-family"
-                  to={"/todonate/" + userId}
+                  to={"/todonate"}
                 >
                  <div> To Donate List</div>
                 </Link>

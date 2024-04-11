@@ -12,6 +12,8 @@ import UploadOrphanageProfilePhoto from "./components/UploadOrphanageProfilePhot
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadOrphanagePhotos from "./components/UploadOrphanagePhotos";
 import Forum from "./pages/Forum/Forum";
+import UploadUserProfilePhoto from "./components/UploadUserProfilePhoto";
+import ForumChat from "./pages/ForumChat/ForumChat";
 
 function App() {
   return (
@@ -23,12 +25,14 @@ function App() {
         <Route path="orpregister" element={<OrpRegister />} />
         <Route path="login" element={<Login />} />
         <Route path="donation" element={<Donation />} />
-        <Route path="todonate/:userid" element={<ToDonateList />} />
+        <Route path="todonate" element={<ToDonateList />} />
         <Route path="news" element={<OrphanageNews />} />
         <Route path="spinner" element={<Spinner />} />
         <Route path="upload-orp-profile-photo/:orphanageid" element={<UploadOrphanageProfilePhoto />} />
         <Route path="upload-orp-photos/:orphanageid" element={<UploadOrphanagePhotos />} />
+        <Route path="upload-user-profile-photo" element={<UploadUserProfilePhoto />} />
         <Route path="forum" element={<Forum />} />
+        <Route path="forumchat/:forumid" element={<ForumChat />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>

@@ -1,6 +1,18 @@
 *{
     margin: 0;
 }
+::-webkit-scrollbar{
+    width: 6px;
+    margin-right: 4px;
+}
+::-webkit-scrollbar-track{
+    background: #ffffff00;
+}
+::-webkit-scrollbar-thumb {
+    background:#2182561b;
+    border-radius: 30px;
+  }
+
 
 
 

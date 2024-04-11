@@ -77,7 +77,11 @@
   .carbtn2{
     background-color:#4d624b;
   }
-  
+  .CartBtn:disabled{
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
   .IconContainer {
     position: absolute;
     left: -50px;

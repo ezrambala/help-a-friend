@@ -9,30 +9,32 @@ import { collection, getDocs, setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import imglogo from "../../images/logo.png";
 import orpcamimg from "../../images/orphanagecampaign.jpg";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OrphanageNews from "../OrphanageNews/OrphanageNews";
 import Spinner from "../../components/Spinner";
 import CheckConnection from "../../components/CheckConnection";
-
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [orphanageList, setOrphanageList] = useState(null);
   const [capUsername, setCapUsername] = useState(null);
+  const [buttonState, setButtonState] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
     });
   }, []);
-  
-  function userLogout (){
-    signOut(auth).then(() => {
-      alert('user logged out')
-      navigate("/")
-    }).catch((error) => {
-      alert('there was an error')
-    });
+
+  function userLogout() {
+    signOut(auth)
+      .then(() => {
+        alert("user logged out");
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("there was an error");
+      });
   }
   const getOrphanages = async () => {
     const allOrphanages = await getDocs(collection(db, "orphanages"));
@@ -41,7 +43,6 @@ export default function Dashboard() {
       id: doc.id,
     }));
     setOrphanageList(orphanageData);
-    console.log(allOrphanages);
   };
 
   function capitalize(str) {
@@ -67,7 +68,6 @@ export default function Dashboard() {
   if (!orphanageList) {
     return <Spinner />;
   }
- 
 
   return (
     <>
@@ -121,7 +121,7 @@ export default function Dashboard() {
 
               <div>
                 {/* <Chatsvg height={"44px"} width={"44px"} /> */}
-                <Link className="dp-heading-font-family dashboard-login-icon">
+                <Link to={"/forum"} className="dp-heading-font-family dashboard-login-icon">
                   FORUM
                 </Link>
               </div>
@@ -153,7 +153,7 @@ export default function Dashboard() {
                     >
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family"
-                        to={"todonate/" + user?.uid}
+                        to={"/todonate"}
                       >
                         <div>To Donate List </div>
                       </Link>
@@ -193,8 +193,11 @@ export default function Dashboard() {
                 {orphanageList.map((orpl) => (
                   <div className="orp-detailcard">
                     <div>
-                      <Link className="oprcard-head" to={"orphanage/" + orpl.id}>
-                        <h3 >{orpl.name}</h3>
+                      <Link
+                        className="oprcard-head"
+                        to={"orphanage/" + orpl.id}
+                      >
+                        <h3>{orpl.name}</h3>
                       </Link>
 
                       <div className="orp-bio">{orpl.orphanage_biography}</div>
@@ -212,17 +215,23 @@ export default function Dashboard() {
                         <button
                           className="CartBtn"
                           onClick={() => {
+                            setButtonState(true);
                             try {
-                              setDoc(
-                                doc(db, "ToDonateList", user?.uid),
-                                { [orpl.id]: orpl.id },
-                                { merge: true }
-                              );
-                              alert("orphanage bookmarked")
+                              const uploadToDonateList = async () => {
+                                await setDoc(
+                                  doc(db, "ToDonateList", user?.uid),
+                                  { [orpl.id]: orpl.id },
+                                  { merge: true }
+                                );
+                                
+                                setButtonState(false);
+                              };
+                              uploadToDonateList();
                             } catch (error) {
                               navigate("/register");
                             }
                           }}
+                          disabled={buttonState}
                         >
                           <span className="IconContainer">
                             <svg
@@ -239,7 +248,7 @@ export default function Dashboard() {
                         </button>
                       </div>
                       <div>
-                        <button className="CartBtn carbtn2">
+                        <button className="CartBtn carbtn2" disabled={buttonState}>
                           <span className="IconContainer">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

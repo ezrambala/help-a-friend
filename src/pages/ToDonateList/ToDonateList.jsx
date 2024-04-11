@@ -20,7 +20,6 @@ export default function ToDonateList() {
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        console.log(firebaseUser);
         setUser(firebaseUser);
       } else {
         navigate("/");
@@ -29,9 +28,10 @@ export default function ToDonateList() {
   }, []);
 
   const getToDonateList = async () => {
-    const ToDonate = await getDoc(doc(db, "ToDonateList", userId));
+    const ToDonate = await getDoc(doc(db, "ToDonateList", userIdtwo));
     if (ToDonate.exists()) {
       const ToDonateData = ToDonate.data();
+      console.log(ToDonateData);
       console.log(Object.values(ToDonateData));
       const ToDonateDataAsList = Object.values(ToDonateData);
 
@@ -54,14 +54,15 @@ export default function ToDonateList() {
 
   useEffect(() => {
     if (user) {
-      const testUser = () => {
-        if (userIdtwo == userId) {
-          getToDonateList();
-        } else {
-          navigate("/");
-        }
-      };
-      testUser();
+      // const testUser = () => {
+      //   if (userIdtwo == userId) {
+      //     getToDonateList();
+      //   } else {
+      //     navigate("/");
+      //   }
+      // };
+      // testUser();
+      getToDonateList();
     }
   }, [user]);
 
