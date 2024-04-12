@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import { storage } from "../firebase/config";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useParams, useNavigate } from "react-router-dom";
-import { db } from "../firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../firebase/config";
 import { setDoc, doc } from "firebase/firestore";
 import "./ComponentsCss/uploadorphanagephotos.css";
 
 export default function UploadOrphanagePhotos() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
+  const [user, setUser] = useState(null);
+  const userId =user?.uid;
   //imgurlAsList is so that i dont have to map through imgUrl when storing it in the database
   //and img url is so that i can count when the urls are up to 5 and render particular codes
   // const [imgUrlAsList, setImgUrlAsList] = useState({});
@@ -20,6 +23,15 @@ export default function UploadOrphanagePhotos() {
   let count = 1;
   let countTwo = 1;
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+      } else {
+        navigate("/");
+      }
+    });
+  });
   useEffect(() => {
     console.log(imgUrl);
   }, [imgUrl]);
@@ -59,7 +71,6 @@ export default function UploadOrphanagePhotos() {
           () => {
             alert("success");
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-             
               setImgUrl((prevImgUrl) => [
                 ...prevImgUrl,
                 { photoUrl: downloadURL },
@@ -68,7 +79,6 @@ export default function UploadOrphanagePhotos() {
               //   ...prevImgUrlAslist,
               //   [imageiden]: downloadURL,
               // }));
-              
             });
           }
         );
@@ -83,27 +93,28 @@ export default function UploadOrphanagePhotos() {
   // as an object field in the orphanages collection under the orphanage document that has the-
   // orphangeId as document id
   useEffect(() => {
-  if (imgUrl.length == 5) {
-    imgUrl.map((imges) => {
-      let imageidentwo = "url" + countTwo;
-      const storePhotourl = async () => {
-        await setDoc(
-          doc(db, "orphanages", orphanageId),
-          {
-            orphanage_photos: {
-              [imageidentwo]: imges.photoUrl,
+    if (imgUrl.length == 5) {
+      imgUrl.map((imges) => {
+        let imageidentwo = "url" + countTwo;
+        const storePhotourl = async () => {
+          await setDoc(
+            doc(db, "orphanages", orphanageId),
+            {
+              orphanage_photos: {
+                [imageidentwo]: imges.photoUrl,
+              },
+              orphanage_photos_uploadedBy: userId,
             },
-          },
-          { merge: true }
-        );
-      };
-      storePhotourl();
-      alert(imageidentwo);
-      countTwo = countTwo + 1;
-    });
-    navigate("/upload-orp-profile-photo/" + orphanageId);
-  }
-}, [imgUrl])
+            { merge: true }
+          );
+        };
+        storePhotourl();
+        alert(imageidentwo);
+        countTwo = countTwo + 1;
+      });
+      navigate("/upload-orp-profile-photo/" + orphanageId);
+    }
+  }, [imgUrl]);
 
   return (
     <div className="uploadmul-container">
@@ -115,8 +126,17 @@ export default function UploadOrphanagePhotos() {
         onChange={handleFileChange}
         className="upload-mul-pic-form"
       >
-        <input type="file" accept=".jpeg,.jpg" multiple className="dp-heading-font-family" />
-        <button className="um-upload-btn dp-heading-font-family" type="submit"  disabled={buttonState}>
+        <input
+          type="file"
+          accept=".jpeg,.jpg"
+          multiple
+          className="dp-heading-font-family"
+        />
+        <button
+          className="um-upload-btn dp-heading-font-family"
+          type="submit"
+          disabled={buttonState}
+        >
           Upload
         </button>
       </form>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./orpregister.css";
+import "../OrpanageRegistration/orpregister.css";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,9 @@ import { onAuthStateChanged } from "firebase/auth"
 export default function CreateForum() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const userPhoto = user?.photoURL
+  const userDisplayName = user?.displayName
+  const userId = user?.uid
   const [formInfo, setFormInfo] = useState({
     name: "",
     description: "",
@@ -28,18 +31,20 @@ export default function CreateForum() {
   function handleSubmitForm(event) {
     event.preventDefault();
     console.log(formInfo);
-
     addDoc(collection(db, "forums"), {
       name: formInfo.name,
       description: formInfo.description, 
-      creatorUrl: user?.photoUrl,
-      creatorDisplayName: user?.displayName,
+      creatorUrl: userPhoto,
+      creatorId: userId,
+      creatorDisplayName: userDisplayName,
       status: "pending",
+      photoUrlUploadedBy: "",
+      photoUrl: "",
       createdAt: serverTimestamp(),
     })
       .then((docRef) => {
-        alert("Orphanage Registered");
-        navigate("/upload-orp-photos/" + docRef.id)
+        alert("Forum Registered");
+        navigate("/upload-forum-photo/" + docRef.id)
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -39,8 +39,6 @@ export default function Orphanage() {
         const allOrphanages = await getDoc(doc(db, "orphanages", orphanageId));
         if (allOrphanages.exists()) {
           const orphanageData = allOrphanages.data();
-          console.log(orphanageData.num_of_male_children);
-          console.log(orphanageData.num_of_female_children);
           if (orphanageData.orphanage_profile_photo) {
             setImgSrc(orphanageData.orphanage_profile_photo);
           }

@@ -53,7 +53,10 @@ export default function Header({ userId }) {
 
         <div>
           {/* <ChatsvgGreen height={"44px"} width={"44px"} /> */}
-          <Link className="orphanage-login-icon dp-heading-font-family">
+          <Link
+            to={"/forum"}
+            className="orphanage-login-icon dp-heading-font-family"
+          >
             FORUM
           </Link>
         </div>
@@ -85,7 +88,13 @@ export default function Header({ userId }) {
                   className="orphanage-login-dpdown  dp-heading-font-family"
                   to={"/todonate"}
                 >
-                 <div> To Donate List</div>
+                  <div> To Donate List</div>
+                </Link>
+                <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family"
+                  to={"/create-forum"}
+                >
+                  <div> Create Forum </div>
                 </Link>
 
                 <Link
