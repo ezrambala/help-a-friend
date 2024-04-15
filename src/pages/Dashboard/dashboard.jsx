@@ -254,7 +254,7 @@ export default function Dashboard() {
                         </button>
                       </div>
                       <div>
-                        <button className="CartBtn carbtn2" disabled={buttonState}>
+                        <button className="CartBtn carbtn2" onClick={() => {navigate("/donation/"+orpl.id+"/"+orpl.name)}} disabled={buttonState}>
                           <span className="IconContainer">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

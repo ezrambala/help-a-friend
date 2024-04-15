@@ -26,7 +26,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="orpregister" element={<OrpRegister />} />
         <Route path="login" element={<Login />} />
-        <Route path="donation" element={<Donation />} />
+        <Route path="donation/:orphanageid/:orphanagename" element={<Donation />} />
         <Route path="todonate" element={<ToDonateList />} />
         <Route path="news" element={<OrphanageNews />} />
         <Route path="spinner" element={<Spinner />} />

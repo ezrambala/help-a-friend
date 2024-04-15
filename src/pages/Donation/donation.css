@@ -1,4 +1,6 @@
-
+.donation-page-container{
+    min-width: 1250px;
+}
 .dp-main-section{
     display: flex;
     justify-content: center;

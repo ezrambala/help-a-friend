@@ -30,7 +30,6 @@ export default function CreateForum() {
 
   function handleSubmitForm(event) {
     event.preventDefault();
-    console.log(formInfo);
     addDoc(collection(db, "forums"), {
       name: formInfo.name,
       description: formInfo.description, 
