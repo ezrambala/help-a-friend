@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./todonatelist.css";
-import { useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
@@ -12,8 +11,7 @@ import Spinner from "../../components/Spinner";
 export default function ToDonateList() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const params = useParams();
-  const userId = params.userid;
+  
   const [orphanageList, setOrphanageList] = useState(null);
   const userIdtwo = user?.uid;
 
@@ -54,14 +52,7 @@ export default function ToDonateList() {
 
   useEffect(() => {
     if (user) {
-      // const testUser = () => {
-      //   if (userIdtwo == userId) {
-      //     getToDonateList();
-      //   } else {
-      //     navigate("/");
-      //   }
-      // };
-      // testUser();
+
       getToDonateList();
     }
   }, [user]);

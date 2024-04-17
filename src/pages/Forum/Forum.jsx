@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { db , auth} from "../../firebase/config";
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth"
 import "./forum.css";
 export default function Forum() {

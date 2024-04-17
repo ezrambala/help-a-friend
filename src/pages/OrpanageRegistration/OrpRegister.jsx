@@ -31,9 +31,8 @@ export default function OrpRegister() {
 
   function handleSubmitForm(event) {
     event.preventDefault();
-    console.log(formInfo);
-    const curDate = new Date();
-    const displayDate = curDate.getDate() + '/' + (curDate.getMonth() + 1) + '/' + curDate.getFullYear();
+    
+    
 
     addDoc(collection(db, "orphanages"), {
       name: formInfo.name,
