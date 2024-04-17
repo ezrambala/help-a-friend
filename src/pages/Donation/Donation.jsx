@@ -37,7 +37,7 @@ export default function Donation() {
   }, []);
 
   const config = {
-    public_key: process.env.REACT_APP_PUBKEY,
+    public_key: process.env.REACT_APP_PUBLICKEY,
     tx_ref: Date.now(),
     amount: formInfo.amount,
     currency: "NGN",
