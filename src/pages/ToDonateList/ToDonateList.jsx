@@ -61,7 +61,7 @@ export default function ToDonateList() {
 
   return (
     <div className="tdl-page-container">
-      <Header userId={user?.uid} />
+      <Header userId={user?.uid} userPhotoURL={user?.photoURL} />
       <div className="tdl-section-one">
         <div>
           <h2 className="tdl-page-heading">{"Hey " + user?.displayName}</h2>

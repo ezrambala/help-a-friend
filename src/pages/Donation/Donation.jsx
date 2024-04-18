@@ -58,7 +58,7 @@ export default function Donation() {
 
   return (
     <div className="donation-page-container">
-      <Header userId={user?.uid} />
+      <Header userId={user?.uid} userPhotoURL={user?.photoURL} />
       <div className="dp-main-section">
         <div className="dp-section-one">
           <div className="dp-haf-img">

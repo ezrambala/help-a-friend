@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import { db , auth} from "../../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth"
+import Spinner from "../../components/Spinner";
 import "./forum.css";
 export default function Forum() {
   const [user, setUser] = useState(null);
@@ -34,11 +35,11 @@ export default function Forum() {
     setForumList(ForumData);
   };
 
-
+if (!user || !forumList){return <Spinner/>}
 
   return (
     <div className="forum-container">
-      <Header userId={user?.uid}/>
+      <Header userId={user?.uid} userPhotoURL={user?.photoURL}/>
       <div className="forum-page-heading">
         <h3 className="dp-heading-font-family">Welcom To Our Forum</h3>
       </div>

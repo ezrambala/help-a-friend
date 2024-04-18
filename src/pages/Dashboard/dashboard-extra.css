@@ -1,58 +1,22 @@
 .cssbuttons-io {
-    position: relative;
-    font-family: inherit;
     font-weight: 500;
-    font-size: 14px;
+    height: 40px;
+    width: 100px;
     letter-spacing: 0.05em;
-    border-radius: 1em;
-    cursor: pointer;
+    border-radius: 8px;
     border: none;
-    background: linear-gradient(to right, #668663, #b6d9b3);
-    color: ghostwhite;
+    background: #4d624b;
     overflow: hidden;
-  }
-  
-  .cssbuttons-io svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.5em;
-  }
-  
-  .cssbuttons-io span {
-    position: relative;
-    z-index: 10;
-    transition: color 0.4s;
-    display: inline-flex;
+
+    font-size: small;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0.8em 1.2em 0.8em 1.05em;
+    color: white;
+    cursor: pointer;
   }
   
-  .cssbuttons-io::before,
-  .cssbuttons-io::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
   
-  .cssbuttons-io::before {
-    content: "";
-    background: #000;
-    width: 120%;
-    left: -10%;
-    transform: skew(30deg);
-    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
-  }
-  
-  .cssbuttons-io:hover::before {
-    transform: translate3d(100%, 0, 0);
-  }
-  
-  .cssbuttons-io:active {
-    transform: scale(0.95);
-  }
 
 
 
@@ -69,10 +33,16 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
     overflow: hidden;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
     position: relative;
+  }
+  .CartBtn:hover{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: 0.5s;
   }
   .carbtn2{
     background-color:#4d624b;
@@ -109,8 +79,8 @@
     justify-content: center;
     color: rgb(17, 17, 17);
     z-index: 1;
-    transition-duration: .5s;
-    font-size: 1.04em;
+    transition-duration: 0.5s;
+    font-size: 1em;
     font-weight: 600;
     margin-top: 15px;
   }
@@ -118,12 +88,12 @@
   .CartBtn:hover .IconContainer {
     transform: translateX(58px);
     border-radius: 40px;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
   }
   
   .CartBtn:hover .text {
-    transform: translate(10px,0px);
-    transition-duration: .5s;
+    transform: translate(35px,0px);
+    transition-duration: 0.5s;
   }
   
   .CartBtn:active {

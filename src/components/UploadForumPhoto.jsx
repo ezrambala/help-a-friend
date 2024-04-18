@@ -89,7 +89,7 @@ function UploadForumPhoto() {
   return (
     <div className="uploadmul-container">
       <h2 className="dp-heading-font-family upload-img-header">
-        Upload Your Profile Photo
+        Upload Your Forum Photo
       </h2>
       <form onSubmit={handleSubmit} className="upload-mul-pic-form">
         <input type="file" accept=".jpeg,.jpg"  className="dp-heading-font-family" />

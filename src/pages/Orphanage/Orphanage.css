@@ -28,15 +28,20 @@
 }
 
 .two-logo{
-  
-    height: 100%;
+    overflow: hidden;
+    height: 85%;
+    width: 250px;
     box-sizing: border-box;
     display: flex;
+    justify-content: center;
     align-items: center;
+    border: 1.5px solid #668663;
+    border-radius: 5px;
+    transition: 1.5s;
 }
-.two-logo-img{
-    width: 300px;
-    height: 80%;
+.two-logo:hover{
+    transition: 0.8s;
+    transform: translateX(30px);
 }
 
 .two-search{
@@ -85,6 +90,7 @@
     cursor: pointer;
 
 }
+
 
 .two-header-icons{
     width: fit-content; 

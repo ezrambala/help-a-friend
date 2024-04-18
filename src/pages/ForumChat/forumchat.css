@@ -167,7 +167,7 @@ background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 1
 }
 
 .text-box-user-img{
-    background-color: red;
+    background-color: inherit;
     width: 20px;
     height: 20px;
     display: flex;

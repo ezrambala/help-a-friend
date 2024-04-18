@@ -99,7 +99,7 @@ export default function ForumChat() {
   if(!forumList){return <Spinner/>}
   return (
     <div className="forum-chat-container">
-      <Header userId={user?.uid} />
+      <Header userId={user?.uid} userPhotoURL={user?.photoURL} />
       <div className="forum-chat-section-two">
         <div className="forum-chat-info-blocks">
           <div className="forum-description dp-heading-font-family">

@@ -7,7 +7,7 @@ import UserIcon from "../svg/UserIcon";
 import imglogo from "../images/logo.png";
 
 //uses orphanage.css classes
-export default function Header({ userId }) {
+export default function Header({ userId, userPhotoURL }) {
   const navigate = useNavigate();
   function userLogout() {
     signOut(auth)
@@ -23,7 +23,12 @@ export default function Header({ userId }) {
   return (
     <div className="two-header">
       <div className="two-logo">
-        <img src={imglogo} alt="logo" className="two-logo-img"></img>
+        <img
+          width={"250px"}
+          src={imglogo}
+          alt="logo"
+          className="two-logo-img"
+        ></img>
       </div>
 
       <div className="two-header-icons">
@@ -52,7 +57,14 @@ export default function Header({ userId }) {
         )}
 
         <div>
-          {/* <ChatsvgGreen height={"44px"} width={"44px"} /> */}
+          <Link
+            to={"/"}
+            className="orphanage-login-icon dp-heading-font-family"
+          >
+            DASHBOARD
+          </Link>
+        </div>
+        <div>
           <Link
             to={"/forum"}
             className="orphanage-login-icon dp-heading-font-family"
@@ -60,7 +72,6 @@ export default function Header({ userId }) {
             FORUM
           </Link>
         </div>
-
         <div>
           <div className="orphanage-login-icon dp-heading-font-family">
             DONATIONS
@@ -78,7 +89,7 @@ export default function Header({ userId }) {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <UserIcon width={"34px"} height={"34px"} />
+                <img width={"45px"} src={userPhotoURL} alt=""></img>
               </button>
               <div
                 className="dropdown-menu acc-dpdown"

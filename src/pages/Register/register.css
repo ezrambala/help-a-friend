@@ -1,35 +1,4 @@
 
-/* body{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
-} */
-/* .container-three{
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
-.container-three .title{
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-}
-.container-three .title::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 30px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
-} */
 .content-form .form-register .user-details{
   display: flex;
   flex-wrap: wrap;
@@ -104,14 +73,7 @@
    background: rgb(116,204,190);
    background: radial-gradient(circle, rgba(116,204,190,1) 0%, rgba(202,255,252,1) 100%);
  }
- .form-register .button .input-register:hover{
-  /* transform: scale(0.99); */
-  background: rgb(116,204,190);
-  background: radial-gradient(circle, rgba(116,204,190,1) 0%, rgba(154,205,117,1) 100%);
-  border: 1px solid white;
-  border-radius: 17px;
-  transition: 0.3s;
-  }
+ 
  @media(max-width: 584px){
  .container-register{
   max-width: 100%;
@@ -139,19 +101,25 @@
 
 
 .reg-con{
-  width: 750px;
+  width: 55%;
 }
- .regpage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 1250px;
-    height: 100vh;
-    background: rgb(204,198,116);
-    background: radial-gradient(circle, rgba(204,198,116,1) 0%, rgba(154,205,117,1) 100%);
- }
 
- .regtitle{
+.register-bg-color{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.562);
+}
+.regpage{
+  
+  min-width: 1250px;
+  height: 100vh;
+  background-image: url("https://www.economist.com/cdn-cgi/image/width=1096,quality=80,format=auto/sites/default/files/images/print-edition/20170826_MAP003_0.jpg");
+}
+
+.regtitle{
   font-family: "Madimi One", sans-serif;
   font-size: 30px;
  }
