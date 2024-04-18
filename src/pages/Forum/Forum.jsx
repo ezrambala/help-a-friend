@@ -17,7 +17,7 @@ export default function Forum() {
       if (firebaseUser) {
         setUser(firebaseUser);
       } else {
-        navigate("/");
+        navigate("/register");
       }
     });
   }, []);
