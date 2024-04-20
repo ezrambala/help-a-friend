@@ -132,11 +132,18 @@ export default function Register() {
               </div>
               <div className="button">
                 <input
-                  className="input-register"
+                  className="input-register dp-heading-font-family"
                   type="submit"
                   value="Register"
                   disabled={buttonState}
                 ></input>
+              </div>
+              
+              <div className="login-option dp-heading-font-family" onClick={() =>{navigate("/login")}}>
+                Login?
+              </div>
+              <div className="login-option dp-heading-font-family" onClick={() =>{navigate("/")}}>
+                Dashboard?
               </div>
             </form>
           </div>

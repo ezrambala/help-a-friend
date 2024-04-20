@@ -74,6 +74,7 @@
    background: radial-gradient(circle, rgba(116,204,190,1) 0%, rgba(202,255,252,1) 100%);
  }
  
+ 
  @media(max-width: 584px){
  .container-register{
   max-width: 100%;
@@ -122,4 +123,16 @@
 .regtitle{
   font-family: "Madimi One", sans-serif;
   font-size: 30px;
+ }
+
+ .login-option{
+  width: 100%;
+  height: 45px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  border-radius: 8px;
  }

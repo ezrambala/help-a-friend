@@ -16,6 +16,7 @@ import EmailIcon from "../../svg/EmailIcon";
 
 export default function Orphanage() {
   const [user, setUser] = useState(null);
+  const userId = user?.uid;
   const navigate = useNavigate();
   const params = useParams();
   const orphanageId = params.orphanageid;
@@ -24,11 +25,9 @@ export default function Orphanage() {
   const [testConnection, setTestConnection] = useState(false);
   const [buttonState, setButtonState] = useState(false);
   const [imgSrc, setImgSrc] = useState(orpimage);
-  console.log("this is the params" + orphanageId);
-
+  
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
-      console.log(firebaseUser);
       setUser(firebaseUser);
     });
   }, []);
@@ -36,7 +35,6 @@ export default function Orphanage() {
   useEffect(() => {
     const getOrphanages = async () => {
       try {
-        console.log("getting orphanageList...");
         const allOrphanages = await getDoc(doc(db, "orphanages", orphanageId));
         if (allOrphanages.exists()) {
           const orphanageData = allOrphanages.data();
@@ -109,20 +107,27 @@ export default function Orphanage() {
                       className="CartBtn"
                       onClick={() => {
                         setButtonState(true);
-                        try {
-                          const uploadToDonateList = async () => {
+
+                        const uploadToDonateList = async () => {
+                          try {
                             await setDoc(
-                              doc(db, "ToDonateList", user?.uid),
+                              doc(db, "ToDonateList", userId),
                               { [orphanageId]: orphanageId },
                               { merge: true }
                             );
-
-                            setButtonState(false);
-                          };
-                          uploadToDonateList();
-                        } catch (error) {
-                          navigate("/register");
-                        }
+                          } catch (e) {
+                            switch(e.message){
+                              case "Cannot read properties of undefined (reading 'indexOf')":
+                                navigate("/register")
+                                break;
+                              default :
+                              setButtonState(false);
+                            }
+                            
+                          }
+                          setButtonState(false);
+                        };
+                        uploadToDonateList();
                       }}
                       disabled={buttonState}
                     >
@@ -135,15 +140,15 @@ export default function Orphanage() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 512 512"
                           xmlnsXlink="http://www.w3.org/1999/xlink"
-                          enable-background="new 0 0 512 512"
+                          enableBackground="new 0 0 512 512"
                           className="cart"
                         >
-                          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                          <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
                           <g
                             id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
 
                           <g id="SVGRepo_iconCarrier">
@@ -163,7 +168,9 @@ export default function Orphanage() {
                     <button
                       className="CartBtn carbtn2"
                       onClick={() => {
-                        navigate("/donation/" + orphanageId + "/" + orphanageList.name);
+                        navigate(
+                          "/donation/" + orphanageId + "/" + orphanageList.name
+                        );
                       }}
                       disabled={buttonState}
                     >
@@ -180,12 +187,12 @@ export default function Orphanage() {
                           xmlSpace="preserve"
                           className="cart"
                         >
-                          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                          <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
                           <g
                             id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
 
                           <g id="SVGRepo_iconCarrier">

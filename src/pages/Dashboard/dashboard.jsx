@@ -165,16 +165,13 @@ export default function Dashboard() {
                       >
                         <div> Create Forum </div>
                       </Link>
-                      
-                    
+
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family"
                         onClick={userLogout}
                       >
                         <div>Log Out</div>
                       </Link>
-                      
-                     
                     </div>
                   </div>
                 </div>
@@ -247,20 +244,26 @@ export default function Dashboard() {
                             className="CartBtn"
                             onClick={() => {
                               setButtonState(true);
-                              try {
-                                const uploadToDonateList = async () => {
+
+                              const uploadToDonateList = async () => {
+                                try {
                                   await setDoc(
                                     doc(db, "ToDonateList", user?.uid),
                                     { [orpl.id]: orpl.id },
                                     { merge: true }
                                   );
-
-                                  setButtonState(false);
-                                };
-                                uploadToDonateList();
-                              } catch (error) {
-                                navigate("/register");
-                              }
+                                } catch (error) {
+                                  switch(error.message){
+                                    case "Cannot read properties of undefined (reading 'indexOf')":
+                                      navigate("/register")
+                                      break;
+                                    default :
+                                    setButtonState(false);
+                                  }
+                                }
+                                setButtonState(false);
+                              };
+                              uploadToDonateList();
                             }}
                             disabled={buttonState}
                           >
@@ -276,12 +279,12 @@ export default function Dashboard() {
                                 enable-background="new 0 0 512 512"
                                 className="cart"
                               >
-                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
                                 <g
                                   id="SVGRepo_tracerCarrier"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
 
                                 <g id="SVGRepo_iconCarrier">
@@ -320,12 +323,12 @@ export default function Dashboard() {
                                 xmlSpace="preserve"
                                 className="cart"
                               >
-                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
                                 <g
                                   id="SVGRepo_tracerCarrier"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
 
                                 <g id="SVGRepo_iconCarrier">
@@ -375,17 +378,7 @@ export default function Dashboard() {
                       </p>
                     </div>
                     <div className="cp-det-btn">
-                      <div>
-                        {/* <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c2c2c2">
-
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                        <g id="SVGRepo_iconCarrier"> <path d="M20 13L20 18C20 19.1046 19.1046 20 18 20L6 20C4.89543 20 4 19.1046 4 18L4 13" stroke="#c7c7c7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M16 8L12 4M12 4L8 8M12 4L12 16" stroke="#c7c7c7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-                                    
-                                    </svg> */}
-                      </div>
+                      <div></div>
                       <div>
                         <button className="cpcd-dnt">Donate</button>
                       </div>

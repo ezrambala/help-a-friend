@@ -23,6 +23,7 @@ export default function ForumChat() {
   const [messageList, setMessageList] = useState(null);
   const [forumList, setForumList] = useState(null);
   const [testConnection, setTestConnection] = useState(false);
+  const [buttonState, setButtonState] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const forumId = params.forumid;
@@ -34,7 +35,7 @@ export default function ForumChat() {
   });
 
   useEffect(() => {
-    const getForum= async () =>{
+    const getForum = async () => {
       try {
         const forum = await getDoc(doc(db, "forums", forumId));
         if (forum.exists()) {
@@ -47,7 +48,7 @@ export default function ForumChat() {
         console.error("Error fetching orphanages:", error);
         setTestConnection(true);
       }
-    }
+    };
     getForum();
   }, []);
   useEffect(() => {
@@ -60,6 +61,11 @@ export default function ForumChat() {
       }
     });
   }, []);
+  useEffect(() => {
+    if (userId != "u6QKByVqyyOIOZEIrXAIOl9Inxp1") {
+      setButtonState(true);
+    }
+  }, [user]);
 
   useEffect(() => {
     const getMessageRef = query(
@@ -96,7 +102,9 @@ export default function ForumChat() {
       alert("YOU CANT SEND EMPTY TEXTS!!!!!!!!!!!!!!!!!!!");
     }
   };
-  if(!forumList){return <Spinner/>}
+  if (!forumList) {
+    return <Spinner />;
+  }
   return (
     <div className="forum-chat-container">
       <Header userId={user?.uid} userPhotoURL={user?.photoURL} />
@@ -104,7 +112,9 @@ export default function ForumChat() {
         <div className="forum-chat-info-blocks">
           <div className="forum-description dp-heading-font-family">
             <h5>Forum Description</h5>
-            <div className="forum-description-text">{forumList.description}</div>
+            <div className="forum-description-text">
+              {forumList.description}
+            </div>
           </div>
         </div>
 
@@ -130,8 +140,12 @@ export default function ForumChat() {
           })}
         </div>
       </div>
-      <form className="forum-chatform" onSubmit={uploadMessage}>
+      <form
+        className="forum-chatform"
+        onSubmit={uploadMessage}
+      >
         <input
+          disabled={buttonState}
           value={formInfo.text}
           onChange={(event) => {
             setFormInfo((prevFormInfo) => ({
