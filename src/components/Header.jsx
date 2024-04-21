@@ -64,7 +64,7 @@ export default function Header({ userId, userPhotoURL }) {
         {isMobile ? (
           <>
             <div>
-              <div className="nav-links-menu"><Menusvg height={"34px"} width={"34px"}/></div>
+              <div className="nav-links-menu"><Menusvg height={"22px"} width={"22px"}/></div>
             </div>
           </>
         ) : (

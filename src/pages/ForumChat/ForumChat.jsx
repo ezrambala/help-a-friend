@@ -118,21 +118,71 @@ export default function ForumChat() {
               <Closesvg height={"32px"} width={"32px"} />
             </div>
           </div>
-          <div className="forum-description dp-heading-font-family">
-            <h5>Forum Description</h5>
-            <div className="forum-description-text">
-              {forumList.description}
+          <div>
+            <div className="forum-description dp-heading-font-family">
+              <h5>Forum Description</h5>
+              <div className="forum-description-text">
+                {/* {forumList.description} */}
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+
+              </div>
             </div>
           </div>
-          <div className="forum-rules forum-description dp-heading-font-family">
-            <h5>Forum Rules!!!!</h5>
-            <div className="forum-description-text">
-              <ol>
-              <li>Do not be PRINCEWILL</li>
-              <li>Do not use this platform for any other purpose than helping orphans and  children homes</li>
-              <li>Do not use PROFAINE LANGUAGE or you will be BANNED</li>
-              <li>Do not spam the chat or else you will be BANNED</li>
-              </ol>
+          <div>
+            <div className="forum-rules forum-description dp-heading-font-family">
+              <h5>Forum Rules!!!!</h5>
+              <div className="forum-description-text">
+                <ol>
+                  <li>Do not be PRINCEWILL</li>
+                  <li>
+                    Do not use this platform for any other purpose than helping
+                    orphans and children homes
+                  </li>
+                  <li>Do not use PROFAINE LANGUAGE or you will be BANNED</li>
+                  <li>Do not spam the chat or else you will be BANNED</li>
+                </ol>
+              </div>
             </div>
           </div>
         </div>
