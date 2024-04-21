@@ -40,7 +40,7 @@
     cursor: pointer;
     width: 36px;
     height: 36px;
-    background-color: #819380;
+    background-color: #fd6868;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -235,8 +235,8 @@
         height: 66%;
     }
     .fcib-close{
-        width: 85%;
-       z-index: 999;
+        width: 75%;
+       z-index: 100;
 
     }
     .text-message{
