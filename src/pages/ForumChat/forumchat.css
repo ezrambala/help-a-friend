@@ -30,7 +30,7 @@
 .fcib-close{
     display: flex;
     justify-content: flex-end;
-    width: 67%;
+    width: 67dvw;
     position: fixed;
 }
 
@@ -223,11 +223,11 @@
         
     }
     .forum-chat-info-blocks{
-        width: 81%;
+        width: 78%;
         height: 66%;
     }
     .fcib-close{
-        width: 100%;
+        width: 100dvw;
 
     }
 }

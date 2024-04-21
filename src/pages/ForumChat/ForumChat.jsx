@@ -122,49 +122,8 @@ export default function ForumChat() {
             <div className="forum-description dp-heading-font-family">
               <h5>Forum Description</h5>
               <div className="forum-description-text">
-                {/* {forumList.description} */}
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
-                The name of the bout so thtreic gjgirfikvoivobpogfolfoivvoiv
+                {forumList.description}
+
 
               </div>
             </div>
