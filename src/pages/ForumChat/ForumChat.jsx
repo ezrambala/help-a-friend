@@ -115,7 +115,7 @@ export default function ForumChat() {
             }}
           >
             <div className="fcib-close2">
-              <Closesvg height={"32px"} width={"32px"} />
+              <Menusvg height={"22px"} width={"22px"}/>
             </div>
           </div>
           <div>
