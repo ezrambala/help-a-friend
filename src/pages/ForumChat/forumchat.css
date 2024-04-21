@@ -6,37 +6,48 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
-
-    
+  
 }
-.forum-chat-section-two{
-    padding-top: 20px;
-    padding-left: 10px;
+
+
+ .forum-chat-info-blocks{
+    width: 60%;
+    height: 76%;
     display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: flex-start;
-    gap: 2.5%;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(193, 220, 184, 0.189);
+    padding: 5px 16px 0px 16px; 
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 2px dashed #819380;
     overflow-y: scroll;
+    position: fixed;
+    top: 85px;
+    z-index: 100;
+} 
+
+.fcib-close{
+    display: flex;
+    justify-content: flex-end;
+    width: 67%;
+    position: fixed;
 }
 
-.forum-chat-info-blocks{
-    width: 20%;
-    height: 95%;
-    padding: 5px;
-    overflow-y: scroll;
+.fcib-close2{
+    cursor: pointer;
 }
-.forum-description{
+ .forum-description{
     width: 100%;
     padding: 15px;
     color: white;
-    height: 300px;
+    height: 250px;
     border-radius: 20px;
     background: rgb(197,29,126);
-background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 100%);
-}
-.forum-description-text{
+    background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 100%);
+} 
+ .forum-description-text{
     word-wrap: break-word;
     height: 230px;
     overflow: auto;
@@ -48,14 +59,20 @@ background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 1
 .forum-description-text:hover::-webkit-scrollbar-thumb {
     background:#21825641;
     border-radius: 30px;
-  }
+  } 
+
+.forum-rules{
+    background: rgb(255,255,255);
+    background: linear-gradient(95deg, rgba(255,255,255,1) -9%, rgba(255,1,36,1) 0%, rgba(205,122,53,1) 100%);
+    height: 240px;
+}
 
 .chat-box{
     display: flex;
     flex-direction: column-reverse;
     gap: 20px;
     width: 55%;
-    height: 95%;
+    height: 78%;
     overflow-y: scroll;  
 
 }
@@ -93,8 +110,14 @@ background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 1
     width: 38px;
     background-color: #c6e6c5;
 }
+.forum-description-toggle{
+    cursor: pointer;
+    background: rgb(197,29,126);
+    background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 100%); 
+
+}
 .chat-input{
-    width: 94%;
+    width: 91%;
     border-radius: 6px;
     border: 1px #819380 solid ;
     padding-left: 5px;

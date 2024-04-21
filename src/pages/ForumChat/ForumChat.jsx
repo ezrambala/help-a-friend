@@ -3,6 +3,8 @@ import { db, auth } from "../../firebase/config";
 import Header from "../../components/Header";
 import "./forumchat.css";
 import SendMessageChat from "../../svg/SendMessageSvg";
+import Menusvg from "../../svg/Menusvg";
+import Closesvg from "../../svg/Closesvg";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner";
@@ -24,6 +26,7 @@ export default function ForumChat() {
   const [forumList, setForumList] = useState(null);
   const [testConnection, setTestConnection] = useState(false);
   const [buttonState, setButtonState] = useState(false);
+  const [description, showDescription] = useState(true);
   const navigate = useNavigate();
   const params = useParams();
   const forumId = params.forumid;
@@ -61,11 +64,6 @@ export default function ForumChat() {
       }
     });
   }, []);
-  useEffect(() => {
-    if (userId != "u6QKByVqyyOIOZEIrXAIOl9Inxp1") {
-      setButtonState(true);
-    }
-  }, [user]);
 
   useEffect(() => {
     const getMessageRef = query(
@@ -108,44 +106,64 @@ export default function ForumChat() {
   return (
     <div className="forum-chat-container">
       <Header userId={user?.uid} userPhotoURL={user?.photoURL} />
-      <div className="forum-chat-section-two">
+      {description ? (
         <div className="forum-chat-info-blocks">
+          <div
+            className="fcib-close"
+            onClick={() => {
+              showDescription(false);
+            }}
+          >
+            <div className="fcib-close2">
+              <Closesvg height={"32px"} width={"32px"} />
+            </div>
+          </div>
           <div className="forum-description dp-heading-font-family">
             <h5>Forum Description</h5>
             <div className="forum-description-text">
               {forumList.description}
             </div>
           </div>
+          <div className="forum-rules forum-description dp-heading-font-family">
+            <h5>Forum Rules!!!!</h5>
+            <div className="forum-description-text">
+              <ol>
+              <li>Do not be PRINCEWILL</li>
+              <li>Do not use this platform for any other purpose than helping orphans and  children homes</li>
+              <li>Do not use PROFAINE LANGUAGE or you will be BANNED</li>
+              <li>Do not spam the chat or else you will be BANNED</li>
+              </ol>
+            </div>
+          </div>
         </div>
+      ) : (
+        <></>
+      )}
 
-        <div className="chat-box">
-          {messageList?.map((msg) => {
-            const textBoxcss = msg.user_id == userId ? "user" : "sender";
+      <div className="chat-box">
+        {messageList?.map((msg) => {
+          const textBoxcss = msg.user_id == userId ? "user" : "sender";
 
-            return (
-              <div>
-                <div className={`${textBoxcss}-text-box-container`}>
-                  <div className={`${textBoxcss}-text-box`}>
-                    <div className="text-message">{msg.message}</div>
-                    <div className="text-box-sender-info dp-heading-font-family">
-                      By: {msg.user_name}
-                      <div className="text-box-user-img">
-                        <img width={"22px"} src={msg.user_photo} alt=""></img>
-                      </div>
+          return (
+            <div>
+              <div className={`${textBoxcss}-text-box-container`}>
+                <div className={`${textBoxcss}-text-box`}>
+                  <div className="text-message">{msg.message}</div>
+                  <div className="text-box-sender-info dp-heading-font-family">
+                    By: {msg.user_name}
+                    <div className="text-box-user-img">
+                      <img width={"22px"} src={msg.user_photo} alt=""></img>
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
-      <form
-        className="forum-chatform"
-        onSubmit={uploadMessage}
-      >
+
+      <form className="forum-chatform" onSubmit={uploadMessage}>
         <input
-          disabled={buttonState}
           value={formInfo.text}
           onChange={(event) => {
             setFormInfo((prevFormInfo) => ({
@@ -159,6 +177,14 @@ export default function ForumChat() {
         <button className="send-chat-button">
           <SendMessageChat height={"18px"} width={"18px"} />
         </button>
+        <div
+          onClick={() => {
+            showDescription((prevSDes) => !prevSDes);
+          }}
+          className="forum-description-toggle send-chat-button "
+        >
+          <Menusvg height={"18px"} width={"18px"} />
+        </div>
       </form>
     </div>
   );
