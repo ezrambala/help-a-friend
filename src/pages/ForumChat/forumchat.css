@@ -25,6 +25,7 @@
     position: fixed;
     top: 85px;
     z-index: 100;
+    transition: 0.5s;
 } 
 
 .fcib-close{
@@ -243,7 +244,7 @@
 
     }
     .text-message{
-        max-width: 300px;
+        max-width: 265px;
         max-height: 250px;
         font-size: 13px;
     
