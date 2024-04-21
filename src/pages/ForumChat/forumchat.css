@@ -125,7 +125,7 @@
 
 }
 .chat-input{
-    width: 71%;
+    width: 86%;
     border-radius: 6px;
     border: 1px #819380 solid ;
     padding-left: 5px;
@@ -211,7 +211,7 @@
 
 
 
-@media (max-width:500px){
+@media (max-width:600px){
     .forum-chat-container{
         width: 100%;      
         height: 100dvh;
@@ -229,6 +229,9 @@
         display: flex;
         justify-content: space-between;
         
+    }
+    .chat-input{
+        width: 71%;
     }
     .forum-chat-info-blocks{
         width: 78%;

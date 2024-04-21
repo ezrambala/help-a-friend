@@ -12,7 +12,7 @@ import Menusvg from "../svg/Menusvg";
 //uses orphanage.css classes
 export default function Header({ userId, userPhotoURL }) {
   const navigate = useNavigate();
-  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
   function userLogout() {
     signOut(auth)
       .then(() => {
