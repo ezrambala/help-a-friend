@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
+import "./ComponentsCss/responsivecss.css";
+import { useMediaQuery } from "react-responsive";
 
 import UserIcon from "../svg/UserIcon";
 import imglogo from "../images/logo.png";
+import Menusvg from "../svg/Menusvg";
 
 //uses orphanage.css classes
 export default function Header({ userId, userPhotoURL }) {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   function userLogout() {
     signOut(auth)
       .then(() => {
@@ -22,13 +26,15 @@ export default function Header({ userId, userPhotoURL }) {
 
   return (
     <div className="two-header">
-      <div className="two-logo">
-        <img
-          width={"250px"}
-          src={imglogo}
-          alt="logo"
-          className="two-logo-img"
-        ></img>
+      <div>
+        <div className="two-logo">
+          <img
+          
+            src={imglogo}
+            alt="logo"
+            className="two-logo-img"
+          ></img>
+        </div>
       </div>
 
       <div className="two-header-icons">
@@ -55,28 +61,37 @@ export default function Header({ userId, userPhotoURL }) {
             </div>
           </>
         )}
-
-        <div>
-          <Link
-            to={"/"}
-            className="orphanage-login-icon dp-heading-font-family"
-          >
-            DASHBOARD
-          </Link>
-        </div>
-        <div>
-          <Link
-            to={"/forum"}
-            className="orphanage-login-icon dp-heading-font-family"
-          >
-            FORUM
-          </Link>
-        </div>
-        <div>
-          <div className="orphanage-login-icon dp-heading-font-family">
-            DONATIONS
-          </div>
-        </div>
+        {isMobile ? (
+          <>
+            <div>
+              <div className="nav-links-menu"><Menusvg height={"34px"} width={"34px"}/></div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              <Link
+                to={"/"}
+                className="orphanage-login-icon dp-heading-font-family"
+              >
+                DASHBOARD
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={"/forum"}
+                className="orphanage-login-icon dp-heading-font-family"
+              >
+                FORUM
+              </Link>
+            </div>
+            <div>
+              <div className="orphanage-login-icon dp-heading-font-family">
+                DONATIONS
+              </div>
+            </div>
+          </>
+        )}
 
         {userId ? (
           <div>

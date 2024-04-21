@@ -1,6 +1,6 @@
 
 .forum-chat-container{
-    min-width: 1250px;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -199,3 +199,12 @@
     border-radius: 100%;
     overflow: hidden;
 }
+
+
+
+
+@media (max-width:500px){
+    .forum-chat-container{
+        width: 100vw;
+        
+    }}
