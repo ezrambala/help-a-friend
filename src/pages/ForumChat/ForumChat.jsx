@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../firebase/config";
 import Header from "../../components/Header";
 import "./forumchat.css";
@@ -20,6 +20,7 @@ import {
   doc,
 } from "firebase/firestore";
 
+
 export default function ForumChat() {
   const [user, setUser] = useState(null);
   const [messageList, setMessageList] = useState(null);
@@ -33,6 +34,8 @@ export default function ForumChat() {
   const userId = user?.uid;
   const userPhoto = user?.photoURL;
   const userDisplayName = user?.displayName;
+  const textareaRef = useRef(null);
+  const chatBoxRef = useRef(null);
   const [formInfo, setFormInfo] = useState({
     text: "",
   });
@@ -57,7 +60,6 @@ export default function ForumChat() {
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        console.log(firebaseUser);
         setUser(firebaseUser);
       } else {
         navigate("/");
@@ -84,7 +86,11 @@ export default function ForumChat() {
 
   const uploadMessage = async (event) => {
     event.preventDefault();
-    if (formInfo.text !== "") {
+    textareaRef.current.style.minHeight =10 + "px"
+    chatBoxRef.current.scrollTop= chatBoxRef.current.scrollHeight;
+  
+   
+    if (formInfo.text !== "" && formInfo.text.length < 540) {
       const newForminfo = formInfo.text;
       formInfo.text = "";
       await addDoc(collection(db, "forums/" + forumId + "/chats"), {
@@ -97,9 +103,10 @@ export default function ForumChat() {
         .then(() => {})
         .catch((error) => {});
     } else {
-      alert("YOU CANT SEND EMPTY TEXTS!!!!!!!!!!!!!!!!!!!");
+      alert("YOU CANT SEND EMPTY TEXTS or More than 540 characters");
     }
   };
+
   if (!forumList) {
     return <Spinner />;
   }
@@ -115,7 +122,7 @@ export default function ForumChat() {
             }}
           >
             <div className="fcib-close2">
-              <Closesvg height={"28px"} width={"28px"}/>
+              <Closesvg height={"28px"} width={"28px"} />
             </div>
           </div>
           <div>
@@ -123,8 +130,6 @@ export default function ForumChat() {
               <h5>Forum Description</h5>
               <div className="forum-description-text">
                 {forumList.description}
-
-
               </div>
             </div>
           </div>
@@ -149,7 +154,7 @@ export default function ForumChat() {
         <></>
       )}
 
-      <div className="chat-box">
+      <div className="chat-box" ref={chatBoxRef}>
         {messageList?.map((msg) => {
           const textBoxcss = msg.user_id == userId ? "user" : "sender";
 
@@ -172,17 +177,24 @@ export default function ForumChat() {
       </div>
 
       <form className="forum-chatform" onSubmit={uploadMessage}>
-        <input
+        <textarea
           value={formInfo.text}
           onChange={(event) => {
             setFormInfo((prevFormInfo) => ({
               ...prevFormInfo,
               text: event.target.value,
             }));
+            
+            const newheight = parseInt(event.target.scrollHeight);
+            const newMinheight = Math.min(newheight, 120);
+            event.target.style.minHeight = newMinheight + "px";
           }}
           className="chat-input"
-          type="textarea"
-        ></input>
+          maxLength={"5040"}
+          rows="1"
+          required
+          ref={textareaRef}
+        ></textarea>
         <button className="send-chat-button">
           <SendMessageChat height={"18px"} width={"18px"} />
         </button>

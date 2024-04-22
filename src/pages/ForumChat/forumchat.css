@@ -83,7 +83,8 @@
     width: 55%;
     height: 78%;
     overflow-y: scroll;  
-
+    transition: 1s;
+    scroll-behavior: smooth;
 }
 
 .chat-box::-webkit-scrollbar{
@@ -131,6 +132,7 @@
     border: 1px #819380 solid ;
     padding-left: 5px;
     padding-right:5px;
+    resize: none;    
 }
 
 .user-text-box-container{
@@ -138,15 +140,13 @@
     display: flex;
     flex-direction: row-reverse;
     height: fit-content;
-  
-   
+    transition: 1s;
 }
 .sender-text-box-container{
     width: 100%;
     display: flex;
     height: fit-content;
-
-   
+    transition: 1s;
 }
 .user-text-box{
     width: fit-content;
@@ -173,9 +173,7 @@
 }
 
 .text-message{
-    min-width: fit-content;
-    min-height: fit-content;
-    max-width: 480px;
+    max-width: 410px;
     max-height: 250px;
     overflow-y: auto;
     word-wrap: break-word;
@@ -212,7 +210,7 @@
 
 
 
-@media (max-width:600px){
+@media (max-width:725px){
     .forum-chat-container{
         width: 100%;      
         height: 100dvh;
