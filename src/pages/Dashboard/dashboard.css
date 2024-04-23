@@ -20,10 +20,8 @@
     background-image: url("https://www.economist.com/cdn-cgi/image/width=1096,quality=80,format=auto/sites/default/files/images/print-edition/20170826_MAP003_0.jpg");
     background-repeat: repeat-y;
     background-size: 100%;
-    box-sizing: border-box;
     height: fit-content;
-    width: 100vw;
-
+    width: 100%;
     display: flex;
     flex-direction: column;
   
@@ -161,7 +159,7 @@
     overflow: hidden;
 }
 .acc-icon:focus{
-    border: 2px white solid;
+    border: 2px rgb(177, 193, 175) solid;
     outline: none;
 }
 
@@ -177,11 +175,13 @@
     width: 180px;
     padding-top: 10px;
     padding-bottom: 15px;
+    padding-left: 17px;
     position: fixed;
     top: 75px;
     right: 0px;
     display: flex;
     flex-direction: column;
+    align-items:flex-start ;
     gap: 16px;
     z-index: 300;
     transition: 1s;
@@ -209,14 +209,13 @@
 /* Section One */
 
 .section-one{
-    flex: 1;
+    width: 100%;
     box-sizing: border-box;
-    padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
     height: fit-content;
-    background-color: rgba(222, 222, 222, 0.955);
+    background-color: rgba(255, 255, 255, 0.769);
 }
 
 .secone-header{
@@ -224,10 +223,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     
 }
 
 .nav-btn{
+    width: 100%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -236,9 +237,6 @@
     position: sticky;
     top:5.2rem;
     z-index: 100;
-    /* position: sticky;
-    top: 70px; */
-  
  
 
 }
@@ -247,10 +245,8 @@
 .secone-div3{
     margin-top: 1rem;
     box-sizing: border-box;
-    margin-left: 1px;
-    /* overflow: scroll;
-    overflow-x: hidden; */
-
+    width: 100%;
+    padding-left: 10px;
     height: fit-content;
 }
 
@@ -258,8 +254,8 @@
  display: flex;
  gap: 2rem;
  flex-wrap: wrap;
- /* height: 380px;
- overflow-y: scroll; */
+ width: 100%;
+
 
 
 }
@@ -337,7 +333,7 @@
     width: 490px;
     height: 300px;
     border-width: 3px;
-    border-radius: 35px;
+    border-radius: 6px;
     border: 3px solid #b6d9b3;
     box-sizing: border-box;
     display: flex;
@@ -348,15 +344,24 @@
 }
 
 .orp-campaigncard-divone{
-    border-radius: 38px;
+    border-radius: 18px;
     width: 180px;
     height: 95%;
     display: flex;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
+    transition: 0.3s;
+    margin-bottom: 5px;
     box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
     -webkit-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
     -moz-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
+}
+.orp-campaigncard-divone:hover{
+    box-shadow: none;
+    border-radius: 2px;
+    transition: 1.4s;
+    margin-bottom: 0px;
 }
 .campaign-img{
     width: 600px;
@@ -392,6 +397,7 @@
 }
 
 .cpcd-dnt{
+    color: white;
     border: none;
     display: flex;
     justify-content: center;
@@ -401,4 +407,6 @@
     outline: none;
     border-radius: 7px;
    font-size: 12px;
+   background: rgb(197,29,126);
+   background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 100%); 
 }
