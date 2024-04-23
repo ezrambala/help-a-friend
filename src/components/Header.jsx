@@ -12,6 +12,7 @@ import Menusvg from "../svg/Menusvg";
 //uses orphanage.css classes
 export default function Header({ userId, userPhotoURL }) {
   const [userMenu, setUserMenu] = useState(false);
+  const [navLinkList, setNavLinkList] = useState(false);
   const navigate = useNavigate();
   const isMobile = useMediaQuery({ query: "(max-width: 725px)" });
   function userLogout() {
@@ -29,12 +30,7 @@ export default function Header({ userId, userPhotoURL }) {
     <div className="two-header">
       <div>
         <div className="two-logo">
-          <img
-          
-            src={imglogo}
-            alt="logo"
-            className="two-logo-img"
-          ></img>
+          <img src={imglogo} alt="logo" className="two-logo-img"></img>
         </div>
       </div>
 
@@ -64,8 +60,38 @@ export default function Header({ userId, userPhotoURL }) {
         )}
         {isMobile ? (
           <>
-            <div>
-              <div className="nav-links-menu"><Menusvg height={"22px"} width={"22px"}/></div>
+            <div
+              onClick={() => {
+                setUserMenu(false);
+                setNavLinkList((prev) => !prev);
+              }}
+            >
+              <div className="nav-links-menu">
+                <Menusvg height={"22px"} width={"22px"} />
+              </div>
+            </div>
+            <div className={`nav-links-list-${navLinkList}`}>
+              <div>
+                <Link
+                  to={"/"}
+                  className="orphanage-login-icon dp-heading-font-family"
+                >
+                  DASHBOARD
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to={"/forum"}
+                  className="orphanage-login-icon dp-heading-font-family"
+                >
+                  FORUM
+                </Link>
+              </div>
+              <div>
+                <div className="orphanage-login-icon dp-heading-font-family">
+                  DONATIONS
+                </div>
+              </div>
             </div>
           </>
         ) : (
@@ -98,17 +124,16 @@ export default function Header({ userId, userPhotoURL }) {
           <div>
             <div>
               <button
-                 className="acc-icon"
-                 type="button"
-                 onClick={() => {
-                   setUserMenu((prev) => !prev);
-                 }}
+                className="acc-icon"
+                type="button"
+                onClick={() => {
+                  setNavLinkList(false);
+                  setUserMenu((prev) => !prev);
+                }}
               >
                 <img width={"45px"} src={userPhotoURL} alt=""></img>
               </button>
-              <div
-                className={`acc-dpdown-${userMenu}`}
-              >
+              <div className={`acc-dpdown-${userMenu}`}>
                 <Link
                   className="orphanage-login-dpdown  dp-heading-font-family"
                   to={"/todonate"}
@@ -120,6 +145,12 @@ export default function Header({ userId, userPhotoURL }) {
                   to={"/create-forum"}
                 >
                   <div> Create Forum </div>
+                </Link>
+                <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
+                  to={"/upload-user-profile-photo"}
+                >
+                  <div> Update Profile Photo</div>
                 </Link>
 
                 <Link

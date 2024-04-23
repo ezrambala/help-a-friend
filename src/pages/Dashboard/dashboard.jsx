@@ -152,19 +152,19 @@ export default function Dashboard() {
 
                     <div className={`acc-dpdown-${userMenu}`}>
                       <Link
-                        className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
+                        className="orphanage-login-dpdown  dp-heading-font-family"
                         to={"/todonate"}
                       >
                         <div> To Donate List</div>
                       </Link>
                       <Link
-                        className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
+                        className="orphanage-login-dpdown  dp-heading-font-family "
                         to={"/create-forum"}
                       >
                         <div> Create Forum </div>
                       </Link>
                       <Link
-                        className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
+                        className="orphanage-login-dpdown  dp-heading-font-family "
                         to={"/upload-user-profile-photo"}
                       >
                         <div> Update Profile Photo</div>

@@ -175,18 +175,20 @@
 .acc-dpdown-true{
     background: #668663;
     width: 180px;
+    margin-top: 10px;
     padding-bottom: 15px;
     position: fixed;
     top: 75px;
     right: 0px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 16px;
     z-index: 300;
     transition: 1s;
 }
 .acc-dpdown-false{
     background: #668663;
+    margin: 10px;
     width: 180px;
     padding-bottom: 15px;
     position: fixed;
@@ -194,13 +196,11 @@
     right: -1000px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 16px;
     z-index: 300;
     transition: 3s;
 }
-.dpdown-margin{
-    margin-bottom: 10px;
-}
+
 
 
 
