@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
-import "./ComponentsCss/responsivecss.css";
+
 import { useMediaQuery } from "react-responsive";
 
 import UserIcon from "../svg/UserIcon";
@@ -11,6 +11,7 @@ import Menusvg from "../svg/Menusvg";
 
 //uses orphanage.css classes
 export default function Header({ userId, userPhotoURL }) {
+  const [userMenu, setUserMenu] = useState(false);
   const navigate = useNavigate();
   const isMobile = useMediaQuery({ query: "(max-width: 725px)" });
   function userLogout() {
@@ -95,20 +96,18 @@ export default function Header({ userId, userPhotoURL }) {
 
         {userId ? (
           <div>
-            <div className="dropdown">
+            <div>
               <button
-                className="btn btn-secondary  acc-icon"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
+                 className="acc-icon"
+                 type="button"
+                 onClick={() => {
+                   setUserMenu((prev) => !prev);
+                 }}
               >
                 <img width={"45px"} src={userPhotoURL} alt=""></img>
               </button>
               <div
-                className="dropdown-menu acc-dpdown"
-                aria-labelledby="dropdownMenuButton"
+                className={`acc-dpdown-${userMenu}`}
               >
                 <Link
                   className="orphanage-login-dpdown  dp-heading-font-family"

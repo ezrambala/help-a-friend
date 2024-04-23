@@ -22,8 +22,8 @@
     background-size: 100%;
     box-sizing: border-box;
     height: fit-content;
-    min-width: 1250px;
-    max-width: 1500px;
+    width: 100vw;
+
     display: flex;
     flex-direction: column;
   
@@ -43,7 +43,7 @@
     display: flex;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 300;
 
     justify-content: space-between;
     align-items: center;
@@ -147,6 +147,8 @@
 
 
 .acc-icon{
+    outline: none;
+    border: none;
     width: 45px;
     height: 45px;
     display: flex;
@@ -158,6 +160,10 @@
     background: inherit;
     overflow: hidden;
 }
+.acc-icon:focus{
+    border: 2px white solid;
+    outline: none;
+}
 
 
 .acc-dpdown{
@@ -166,7 +172,35 @@
     margin-right: 130px;
     margin-top: 20px;
 }
-
+.acc-dpdown-true{
+    background: #668663;
+    width: 180px;
+    padding-bottom: 15px;
+    position: fixed;
+    top: 75px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 300;
+    transition: 1s;
+}
+.acc-dpdown-false{
+    background: #668663;
+    width: 180px;
+    padding-bottom: 15px;
+    position: fixed;
+    top: 75px;
+    right: -1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 300;
+    transition: 3s;
+}
+.dpdown-margin{
+    margin-bottom: 10px;
+}
 
 
 

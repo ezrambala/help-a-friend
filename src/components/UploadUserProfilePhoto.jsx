@@ -32,58 +32,55 @@ function UploadUserProfilePhoto() {
   }, []);
 
   const handleSubmit = (e) => {
-    setButtonState(true);
     e.preventDefault();
     const file = e.target[0]?.files[0];
-    if (!file) return;
-    const storageRef = ref(
-      storage,
-      `photos/userPhotos/${userId}/profile-photo/${fileEName}`
-    );
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    if (!file) {alert("CHOOSE A FILE")}
+    if (file) {
+      setButtonState(true);
+      const storageRef = ref(
+        storage,
+        `photos/userPhotos/${userId}/profile-photo/${fileEName}`
+      );
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgresspercent(progress);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgUrl(downloadURL);
-          setUploadtoDb(true);
-        });
-        
-      }
-    );
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgresspercent(progress);
+        },
+        (error) => {
+          alert(error);
+          setButtonState(false);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImgUrl(downloadURL);
+            setUploadtoDb(true);
+          });
+        }
+      );
+    }
   };
   useEffect(() => {
     if (uploadToDb) {
       updateProfile(auth.currentUser, { photoURL: imgUrl })
-          .then(() => {
-            const storeUserPhoto = async () => {
-              await setDoc(
-                doc(db, "Users", userId),
-                {
-                  photoUrl: imgUrl,
-                },
-                { merge: true }
-              );
-              alert("Photo Stored Successfully"); 
-              navigate("/")
-            };
-            storeUserPhoto();
-            })
-          .catch((error) => console.log(error));
+        .then(() => {
+          setButtonState(false);
+          alert("Photo Stored Successfully");
+        })
+        .catch((error) => {
+          console.log(error);
+          setButtonState(false);
+        });
     }
   }, [uploadToDb]);
 
-  if(!user){return <Spinner/>}
+  if (!user) {
+    return <Spinner />;
+  }
 
   //this file and upload orphanage photos use the same css classes
   return (
@@ -92,11 +89,28 @@ function UploadUserProfilePhoto() {
         Upload Your Profile Photo
       </h2>
       <form onSubmit={handleSubmit} className="upload-mul-pic-form">
-        <input type="file" accept=".jpeg,.jpg"  className="dp-heading-font-family" />
-        <button type="submit" className="um-upload-btn dp-heading-font-family" disabled={buttonState}>
+        <input
+          type="file"
+          accept=".jpeg,.jpg"
+          className="dp-heading-font-family"
+        />
+        <button
+          type="submit"
+          className="um-upload-btn dp-heading-font-family"
+          disabled={buttonState}
+        >
           Upload
         </button>
       </form>
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+        className="um-upload-btn dp-heading-font-family"
+        disabled={buttonState}
+      >
+        Back To Dashboard
+      </button>
       {!imgUrl && (
         <div className="outerbar-loading">
           <div

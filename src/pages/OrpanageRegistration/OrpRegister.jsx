@@ -23,16 +23,11 @@ export default function OrpRegister() {
     speNeedsDescrip: "",
   });
 
-  
-  
-
   // const dte = curDate.toDateString();
   // console.log(dte);
 
   function handleSubmitForm(event) {
     event.preventDefault();
-    
-    
 
     addDoc(collection(db, "orphanages"), {
       name: formInfo.name,
@@ -52,14 +47,12 @@ export default function OrpRegister() {
     })
       .then((docRef) => {
         alert("Orphanage Registered");
-        alert(docRef.id);
-        navigate("/upload-orp-photos/" + docRef.id)
+        navigate("/upload-orp-photos/" + docRef.id);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage);
-        console.log(errorCode, errorMessage);
       });
   }
   return (
@@ -270,7 +263,10 @@ export default function OrpRegister() {
         </div> */}
 
         <div className="orp-input-div">
-          <label>Orphanage Biography (This is shown in the About Orphanage section) &nbsp;</label>
+          <label>
+            Orphanage Biography (This is shown in the About Orphanage section)
+            &nbsp;
+          </label>
           <textarea
             name="about-orphanage"
             rows="7"

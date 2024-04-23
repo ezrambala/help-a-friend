@@ -6,17 +6,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../firebase/config";
 import { setDoc, doc } from "firebase/firestore";
 import "./ComponentsCss/uploadorphanagephotos.css";
+import Spinner from "./Spinner";
 
 export default function UploadOrphanagePhotos() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
   const [user, setUser] = useState(null);
-  const userId =user?.uid;
+  const userId = user?.uid;
   //imgurlAsList is so that i dont have to map through imgUrl when storing it in the database
   //and img url is so that i can count when the urls are up to 5 and render particular codes
   // const [imgUrlAsList, setImgUrlAsList] = useState({});
   const [progresspercent, setProgresspercent] = useState(0);
   const [buttonState, setButtonState] = useState(false);
+  const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const orphanageId = params.orphanageid;
@@ -67,18 +69,16 @@ export default function UploadOrphanagePhotos() {
           },
           (error) => {
             alert(error);
+            setButtonState(false);
+            window.location.reload();
           },
           () => {
-            alert("success");
+            setSpinner(true);
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               setImgUrl((prevImgUrl) => [
                 ...prevImgUrl,
                 { photoUrl: downloadURL },
               ]);
-              // setImgUrlAsList((prevImgUrlAslist) => ({
-              //   ...prevImgUrlAslist,
-              //   [imageiden]: downloadURL,
-              // }));
             });
           }
         );
@@ -86,6 +86,7 @@ export default function UploadOrphanagePhotos() {
       });
     } else {
       alert("YOU MUST UPLOAD 5 IMAGES ONLY");
+      setButtonState(false);
     }
   };
 
@@ -106,16 +107,24 @@ export default function UploadOrphanagePhotos() {
               orphanage_photos_uploadedBy: userId,
             },
             { merge: true }
-          );
+          ).catch((error) => {
+            setSpinner(false);
+            alert("you will have to re-upload due to an error,click ok");
+            setButtonState(false);
+            window.location.reload();
+          });
         };
         storePhotourl();
-        alert(imageidentwo);
         countTwo = countTwo + 1;
       });
+
       navigate("/upload-orp-profile-photo/" + orphanageId);
     }
   }, [imgUrl]);
 
+  if (spinner) {
+    return <Spinner />;
+  }
   return (
     <div className="uploadmul-container">
       <h2 className="dp-heading-font-family upload-img-header">

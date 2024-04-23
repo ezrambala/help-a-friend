@@ -5,6 +5,7 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase/config";
 import { setDoc, doc } from "firebase/firestore";
+import Spinner from "./Spinner";
 import "./ComponentsCss/uploadorphanagephotos.css";
 
 function UploadOrphanageProfilePhoto() {
@@ -12,6 +13,7 @@ function UploadOrphanageProfilePhoto() {
   const [progresspercent, setProgresspercent] = useState(0);
   const [uploadToDb, setUploadtoDb] = useState(false);
   const [buttonState, setButtonState] = useState(false);
+  const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const orphanageId = params.orphanageid;
@@ -21,35 +23,42 @@ function UploadOrphanageProfilePhoto() {
     setButtonState(true);
     e.preventDefault();
     const file = e.target[0]?.files[0];
-    if (!file) return;
-    const storageRef = ref(
-      storage,
-      `photos/orphanagePhotos/${orphanageId}/profile-photo/${fileEName}`
-    );
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    if (!file) {
+      setButtonState(false);
+      alert("choose a file");
+    }
+    if (file) {
+      const storageRef = ref(
+        storage,
+        `photos/orphanagePhotos/${orphanageId}/profile-photo/${fileEName}`
+      );
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgresspercent(progress);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgUrl(downloadURL);
-          setUploadtoDb(true);
-        });
-        
-      }
-    );
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgresspercent(progress);
+        },
+        (error) => {
+          setButtonState(false);
+          alert(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImgUrl(downloadURL);
+            setUploadtoDb(true);
+            setButtonState(false);
+          });
+        }
+      );
+    }
   };
   useEffect(() => {
-    if (uploadToDb) {
+    if (imgUrl) {
+      setSpinner(true);
       const storePhotourl = async () => {
         await setDoc(
           doc(db, "orphanages", orphanageId),
@@ -57,12 +66,27 @@ function UploadOrphanageProfilePhoto() {
             orphanage_profile_photo: imgUrl,
           },
           { merge: true }
-        );
+        ).then(() => {
+            setButtonState(false);
+            setSpinner(false);
+
+          })
+          .catch(() => {
+            setButtonState(false);
+            setSpinner(false);
+            alert("an error occured");
+          });
         alert("image uploaded");
+        setButtonState(false);
       };
       storePhotourl();
     }
   }, [uploadToDb]);
+
+  if (spinner) {
+    return <Spinner />;
+  }
+
   //this file and upload orphanage photos use the same css classes
   return (
     <div className="uploadmul-container">
@@ -70,11 +94,26 @@ function UploadOrphanageProfilePhoto() {
         Upload Your Orphanage Profile Photo
       </h2>
       <form onSubmit={handleSubmit} className="upload-mul-pic-form">
-        <input type="file" accept=".jpeg,.jpg"  className="dp-heading-font-family" />
-        <button type="submit" className="um-upload-btn dp-heading-font-family" disabled={buttonState}>
+        <input
+          type="file"
+          accept=".jpeg,.jpg"
+          className="dp-heading-font-family"
+        />
+        <button
+          type="submit"
+          className="um-upload-btn dp-heading-font-family"
+          disabled={buttonState}
+        >
           Upload
         </button>
       </form>
+      <button
+          onClick={()=>{navigate("/")}}
+          className="um-upload-btn dp-heading-font-family"
+          disabled={buttonState}
+        >
+          Back To Dashboard
+        </button>
       {!imgUrl && (
         <div className="outerbar-loading">
           <div

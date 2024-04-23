@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [capUsername, setCapUsername] = useState(null);
   const [buttonState, setButtonState] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [userMenu, setUserMenu] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
@@ -138,36 +139,40 @@ export default function Dashboard() {
                 <></>
               ) : (
                 <div>
-                  <div className="dropdown">
+                  <div>
                     <button
-                      className="btn btn-secondary  acc-icon"
+                      className="acc-icon"
                       type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
+                      onClick={() => {
+                        setUserMenu((prev) => !prev);
+                      }}
                     >
                       <img width={"45px"} src={user?.photoURL} alt=""></img>
                     </button>
-                    <div
-                      className="dropdown-menu acc-dpdown"
-                      aria-labelledby="dropdownMenuButton"
-                    >
+
+                    <div className={`acc-dpdown-${userMenu}`}>
                       <Link
-                        className="orphanage-login-dpdown  dp-heading-font-family"
+                        className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
                         to={"/todonate"}
                       >
                         <div> To Donate List</div>
                       </Link>
                       <Link
-                        className="orphanage-login-dpdown  dp-heading-font-family"
+                        className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
                         to={"/create-forum"}
                       >
                         <div> Create Forum </div>
                       </Link>
+                      <Link
+                        className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
+                        to={"/upload-user-profile-photo"}
+                      >
+                        <div> Update Profile Photo</div>
+                      </Link>
+
 
                       <Link
-                        className="orphanage-login-dpdown  dp-heading-font-family"
+                        className="orphanage-login-dpdown  dp-heading-font-family "
                         onClick={userLogout}
                       >
                         <div>Log Out</div>
@@ -253,12 +258,12 @@ export default function Dashboard() {
                                     { merge: true }
                                   );
                                 } catch (error) {
-                                  switch(error.message){
+                                  switch (error.message) {
                                     case "Cannot read properties of undefined (reading 'indexOf')":
-                                      navigate("/register")
+                                      navigate("/register");
                                       break;
-                                    default :
-                                    setButtonState(false);
+                                    default:
+                                      setButtonState(false);
                                   }
                                 }
                                 setButtonState(false);
