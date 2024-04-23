@@ -173,9 +173,9 @@
     margin-top: 20px;
 }
 .acc-dpdown-true{
-    background: #668663;
+    background-color: rgba(150, 166, 140, 0.902);
     width: 180px;
-    margin-top: 10px;
+    padding-top: 10px;
     padding-bottom: 15px;
     position: fixed;
     top: 75px;
@@ -185,11 +185,12 @@
     gap: 16px;
     z-index: 300;
     transition: 1s;
+    border-radius: 12px 0px 0px 12px;
 }
 .acc-dpdown-false{
-    background: #668663;
-    margin: 10px;
+    background-color: rgb(195, 195, 195);
     width: 180px;
+    padding-top: 10px;
     padding-bottom: 15px;
     position: fixed;
     top: 75px;

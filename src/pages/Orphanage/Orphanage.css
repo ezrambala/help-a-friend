@@ -344,7 +344,7 @@
         border-radius: 5px;
     }
     .nav-links-list-true{
-        width: 200px;
+        width:180px;
         display:flex;
         flex-direction: column;
         gap: 16px;
@@ -356,13 +356,14 @@
         right: 0;
         transition: 1s;
         z-index: 130;
+        border-radius: 10px 0px 0px 10px;
     }
     .nav-links-list-false{
-        width: 200px;
+        width: 180px;
         display:flex;
         flex-direction: column;
         gap: 16px;
-        background-color: white;
+        background-color: rgb(195, 195, 195);
         position: fixed;
         top: 75px;
         right: -1000px;
