@@ -197,6 +197,7 @@
     right: -1000px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 16px;
     z-index: 300;
     transition: 3s;
