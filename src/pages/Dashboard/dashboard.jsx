@@ -18,6 +18,8 @@ import FilterSvg from "../../svg/FilterSvg";
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [orphanageList, setOrphanageList] = useState(null);
+  const [campaignList, setCampaignList] = useState(null);
+  const [campaignFilter, setCampaignFilter] = useState("");
   const [capUsername, setCapUsername] = useState(null);
   const [buttonState, setButtonState] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -47,6 +49,14 @@ export default function Dashboard() {
     }));
     setOrphanageList(orphanageData);
   };
+  const getCampaigns = async () => {
+    const allCampaigns = await getDocs(collection(db, "campaigns"));
+    const campaignData = allCampaigns.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setCampaignList(campaignData);
+  };
 
   function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -60,6 +70,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     getOrphanages();
+    getCampaigns();
   }, []);
   useEffect(() => {
     if (user) {
@@ -169,7 +180,6 @@ export default function Dashboard() {
                       >
                         <div> Update Profile Photo</div>
                       </Link>
-
 
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family "
@@ -356,40 +366,54 @@ export default function Dashboard() {
                     </div>
                   ))}
               </div>
-
+              <div className="search">
+                <div className="filter-container">
+                  <FilterSvg h={"20px"} w={"20px"} />
+                </div>
+                <input
+                  type="search"
+                  placeholder="Filter By Campaign Category"
+                  className="se-input"
+                  value={campaignFilter}
+                  onChange={(event) => {
+                    setCampaignFilter(event.target.value);
+                  }}
+                ></input>
+              </div>
               <div id="campaigns" className="campaigns">
-                <div className="orp-campaigncard">
-                  <div className="orp-campaigncard-divone">
-                    <img
-                      className="campaign-img"
-                      src={orpcamimg}
-                      alt="hey, there"
-                    ></img>
-                  </div>
+                {campaignList?.filter((item) => {
+                    return campaignFilter.toLowerCase() === ""
+                      ? item
+                      : item.categoryTags
+                          .toLowerCase()
+                          .includes(campaignFilter.toLocaleLowerCase());
+                  })
+                  .map((camp) => (
+                    <div className="orp-campaigncard">
+                      <div className="orp-campaigncard-divone">
+                        <img
+                          className="campaign-img"
+                          src={orpcamimg}
+                          alt="hey, there"
+                        ></img>
+                      </div>
 
-                  <div className="orp-cpcard-divtwo">
-                    <div className="campaign-details">
-                      <h3 className="cp-det-header"> Education For Gwarimpa</h3>
-                      <p className="campaign-card-bio">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </p>
-                    </div>
-                    <div className="cp-det-btn">
-                      <div></div>
-                      <div>
-                        <button className="cpcd-dnt">Donate</button>
+                      <div className="orp-cpcard-divtwo">
+                        <div className="campaign-details">
+                          <h3 className="cp-det-header">{camp.title}</h3>
+                          <p className="campaign-card-bio">
+                           {camp.description}
+                          </p>
+                        </div>
+                        <div className="cp-det-btn">
+                          <div></div>
+                          <div>
+                            <button className="cpcd-dnt">Donate</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  ))}
               </div>
             </div>
           </section>

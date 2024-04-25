@@ -16,6 +16,7 @@ import UploadUserProfilePhoto from "./components/UploadUserProfilePhoto";
 import ForumChat from "./pages/ForumChat/ForumChat";
 import CreateForum from "./pages/CreateForum/CreateForum";
 import UploadForumPhoto from "./components/UploadForumPhoto";
+import CreateCampaign from "./pages/CreateCampaign/CreateCampaign";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="forumchat/:forumid" element={<ForumChat />} />
         <Route path="create-forum" element={<CreateForum />} />
         <Route path="upload-forum-photo/:forumid" element={<UploadForumPhoto />} />
+        <Route path="create-campaign" element={<CreateCampaign />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>
