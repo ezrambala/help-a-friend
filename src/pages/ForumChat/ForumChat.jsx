@@ -155,11 +155,12 @@ export default function ForumChat() {
       )}
 
       <div className="chat-box" ref={chatBoxRef}>
-        {messageList?.map((msg) => {
+        {messageList?.map((msg, index) => {
           const textBoxcss = msg.user_id == userId ? "user" : "sender";
+          const newParagraphs = msg.message.split(/\n\s*\n/)
 
           return (
-            <div>
+            <div key={index}>
               <div className={`${textBoxcss}-text-box-container`}>
                 <div className={`${textBoxcss}-text-box`}>
                   <div className="text-message">{msg.message}</div>

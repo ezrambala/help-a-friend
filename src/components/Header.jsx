@@ -152,7 +152,12 @@ export default function Header({ userId, userPhotoURL }) {
                 >
                   <div> Update Profile Photo</div>
                 </Link>
-
+                <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family "
+                  to={"/your-donations"}
+                >
+                  <div>Your Donations</div>
+                </Link>
                 <Link
                   className="orphanage-login-dpdown  dp-heading-font-family"
                   onClick={userLogout}

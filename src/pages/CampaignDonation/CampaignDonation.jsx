@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./donation.css";
+import "../Donation/donation.css";
 import imgbanner from "../../images/help-a-friend-banner.png";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../../firebase/config";
@@ -8,7 +8,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import Header from "../../components/Header";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-export default function Donation() {
+export default function CampaignDonation() {
   const [user, setUser] = useState(null);
   const userId = user?.uid;
   const userEmail = user?.email;
@@ -79,7 +79,7 @@ export default function Donation() {
           <h5 className="dp-heading-font-family dashed-border">
             One Time Payment
           </h5>
-          <h5 className="dp-heading-font-family">Orphanage</h5>
+          <h5 className="dp-heading-font-family">Campaign</h5>
           <input className="dp-input" value={orphanageName}></input>
           <h5 className="dp-heading-font-family">Enter the Donation Amount</h5>
           <input
@@ -118,8 +118,8 @@ export default function Donation() {
               handleFlutterPayment({
                 callback: async (response) => {
                   console.log(response);
-                  await addDoc(collection(db, "orphanage-payments"), {
-                    orphanage_id: orphanageId,
+                  await addDoc(collection(db, "campaign-payments"), {
+                    campaign_id: orphanageId,
                     user_id: userId,
                     amount: onclickAmount,
                     createdAt: serverTimestamp(),

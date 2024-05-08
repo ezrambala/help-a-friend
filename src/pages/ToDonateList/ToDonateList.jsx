@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./todonatelist.css";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  deleteField,
+} from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
@@ -11,7 +16,7 @@ import Spinner from "../../components/Spinner";
 export default function ToDonateList() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  
+  const [updatePage, setUpdatePage] = useState(false);
   const [orphanageList, setOrphanageList] = useState(null);
   const userIdtwo = user?.uid;
 
@@ -25,37 +30,37 @@ export default function ToDonateList() {
     });
   }, []);
 
-  const getToDonateList = async () => {
-    const ToDonate = await getDoc(doc(db, "ToDonateList", userIdtwo));
-    if (ToDonate.exists()) {
-      const ToDonateData = ToDonate.data();
-      console.log(ToDonateData);
-      console.log(Object.values(ToDonateData));
-      const ToDonateDataAsList = Object.values(ToDonateData);
-
-      const orphanageDataPromises = ToDonateDataAsList.map(async (orpl) => {
-        return getDoc(doc(db, "orphanages", orpl));
-      });
-      Promise.all(orphanageDataPromises).then((orphanageData) => {
-        console.log(orphanageData);
-        const allorphanages = orphanageData.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setOrphanageList(allorphanages);
-        console.log(allorphanages);
-      });
-    } else {
-      navigate("/");
-    }
-  };
-
   useEffect(() => {
-    if (user) {
+    const getToDonateList = async () => {
+      const ToDonate = await getDoc(doc(db, "ToDonateList", userIdtwo));
+      if (ToDonate.exists()) {
+        const ToDonateData = ToDonate.data();
+        console.log(ToDonateData);
+        console.log(Object.values(ToDonateData));
+        const ToDonateDataAsList = Object.values(ToDonateData);
 
+        const orphanageDataPromises = ToDonateDataAsList.map(async (orpl) => {
+          return getDoc(doc(db, "orphanages", orpl));
+        });
+        Promise.all(orphanageDataPromises).then((orphanageData) => {
+          console.log(orphanageData);
+          const allorphanages = orphanageData.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setOrphanageList(allorphanages);
+          console.log(allorphanages);
+        });
+      } else {
+        navigate("/");
+      }
+    };
+    if (user) {
       getToDonateList();
     }
-  }, [user]);
+  }, [updatePage, user]);
+
+
 
   if (!orphanageList) return <Spinner />;
 
@@ -83,8 +88,26 @@ export default function ToDonateList() {
                 <div style={{ fontSize: "12px" }}>{orpl.address}</div>
               </div>
               <div className="tdt-content-two">
-                <div className="tdt-link">Donate</div>
-                <div className="tdt-link">Remove</div>
+                <div
+                  className="tdt-link"
+                  onClick={() => {
+                    navigate("/donation/" + orpl.id + "/" + orpl.name);
+                  }}
+                >
+                  Donate
+                </div>
+                <div
+                  className="tdt-link"
+                  onClick={async () => {
+                    const docRef = doc(db, "ToDonateList", userIdtwo);
+                    await updateDoc(docRef, {
+                      [orpl.id]: deleteField(),
+                    });
+                    setUpdatePage((prev) => !prev);
+                  }}
+                >
+                  Remove
+                </div>
               </div>
             </div>
           </div>

@@ -99,6 +99,7 @@
     height: 27px;
     color: white;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .tdl-card-numbering{

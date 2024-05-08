@@ -17,6 +17,8 @@ import ForumChat from "./pages/ForumChat/ForumChat";
 import CreateForum from "./pages/CreateForum/CreateForum";
 import UploadForumPhoto from "./components/UploadForumPhoto";
 import CreateCampaign from "./pages/CreateCampaign/CreateCampaign";
+import CampaignDonation from "./pages/CampaignDonation/CampaignDonation";
+import UserDonation from "./pages/UserDonations/UserDonations";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
         <Route path="orpregister" element={<OrpRegister />} />
         <Route path="login" element={<Login />} />
         <Route path="donation/:orphanageid/:orphanagename" element={<Donation />} />
+        <Route path="campaign-donation/:orphanageid/:orphanagename" element={<CampaignDonation />} />
         <Route path="todonate" element={<ToDonateList />} />
         <Route path="news" element={<OrphanageNews />} />
         <Route path="spinner" element={<Spinner />} />
@@ -39,6 +42,7 @@ function App() {
         <Route path="create-forum" element={<CreateForum />} />
         <Route path="upload-forum-photo/:forumid" element={<UploadForumPhoto />} />
         <Route path="create-campaign" element={<CreateCampaign />} />
+        <Route path="your-donations" element={<UserDonation/>} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>

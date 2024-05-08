@@ -180,6 +180,12 @@ export default function Dashboard() {
                       >
                         <div> Update Profile Photo</div>
                       </Link>
+                      <Link
+                        className="orphanage-login-dpdown  dp-heading-font-family "
+                        to={"/your-donations"}
+                      >
+                        <div>Your Donations</div>
+                      </Link>
 
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family "
@@ -198,7 +204,7 @@ export default function Dashboard() {
             <div className="secone-header">
               <h3>Discover The World of Children In Need...</h3>
             </div>
-            {/* <OrphanageNews /> */}
+            <OrphanageNews />
             <div className="nav-btn">
               <a href={"#orphanage-filter"} className="cssbuttons-io ">
                 <div>Orphanages</div>
@@ -366,7 +372,7 @@ export default function Dashboard() {
                     </div>
                   ))}
               </div>
-              <div className="search">
+              <div className="search search-2">
                 <div className="filter-container">
                   <FilterSvg h={"20px"} w={"20px"} />
                 </div>
@@ -408,7 +414,7 @@ export default function Dashboard() {
                         <div className="cp-det-btn">
                           <div></div>
                           <div>
-                            <button className="cpcd-dnt">Donate</button>
+                            <button onClick={()=>{navigate("/campaign-donation/" + camp.id+"/"+ camp.title)}} className="cpcd-dnt">Donate</button>
                           </div>
                         </div>
                       </div>
