@@ -5,7 +5,7 @@ import ExcSvg from "../../svg/ExcSvg";
 import UserIcon from "../../svg/UserIcon";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import imglogo from "../../images/logo.png";
 import orpcamimg from "../../images/orphanagecampaign.jpg";
@@ -24,6 +24,7 @@ export default function Dashboard() {
   const [buttonState, setButtonState] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [userMenu, setUserMenu] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
@@ -40,6 +41,11 @@ export default function Dashboard() {
       .catch((error) => {
         alert("there was an error");
       });
+  }
+  async function getUser() {
+    const userInfo = await getDoc(doc(db, "Users", user.uid));
+    const userData = userInfo.data();
+    setUserInfo(userData);
   }
   const getOrphanages = async () => {
     const allOrphanages = await getDocs(collection(db, "orphanages"));
@@ -76,6 +82,7 @@ export default function Dashboard() {
     if (user) {
       const str = user?.displayName;
       setCapUsername(capitalize(str));
+      getUser();
     }
   }, [user]);
 
@@ -180,6 +187,29 @@ export default function Dashboard() {
                       >
                         <div> Update Profile Photo</div>
                       </Link>
+                      {userInfo.userType == 12 ? (
+                        <>
+                          <Link
+                            className="orphanage-login-dpdown  dp-heading-font-family "
+                            to={
+                              "/upload-orp-profile-photo/" +
+                              userInfo.orphanageCreated
+                            }
+                          >
+                            <div> Update Orphange Photo</div>
+                          </Link>
+                          <Link
+                            className="orphanage-login-dpdown  dp-heading-font-family "
+                            to={
+                              "/orphanage-earnings/" + userInfo.orphanageCreated
+                            }
+                          >
+                            <div>Orphange Earnings</div>
+                          </Link>
+                        </>
+                      ) : (
+                        <></>
+                      )}
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family "
                         to={"/your-donations"}
@@ -387,7 +417,8 @@ export default function Dashboard() {
                 ></input>
               </div>
               <div id="campaigns" className="campaigns">
-                {campaignList?.filter((item) => {
+                {campaignList
+                  ?.filter((item) => {
                     return campaignFilter.toLowerCase() === ""
                       ? item
                       : item.categoryTags
@@ -406,15 +437,26 @@ export default function Dashboard() {
 
                       <div className="orp-cpcard-divtwo">
                         <div className="campaign-details">
-                          <h3 className="cp-det-header">{camp.title}</h3>
-                          <p className="campaign-card-bio">
-                           {camp.description}
-                          </p>
+                          <h5 className="cp-det-header">{camp.title}</h5>
+                          <div className="campaign-card-bio">
+                            {camp.description}
+                          </div>
                         </div>
                         <div className="cp-det-btn">
-                          <div></div>
                           <div>
-                            <button onClick={()=>{navigate("/campaign-donation/" + camp.id+"/"+ camp.title)}} className="cpcd-dnt">Donate</button>
+                            <button
+                              onClick={() => {
+                                navigate(
+                                  "/campaign-donation/" +
+                                    camp.id +
+                                    "/" +
+                                    camp.title
+                                );
+                              }}
+                              className="cpcd-dnt"
+                            >
+                              Donate
+                            </button>
                           </div>
                         </div>
                       </div>

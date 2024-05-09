@@ -111,13 +111,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.562);
+
 }
 .regpage{
-  
   min-width: 1250px;
   height: 100vh;
-  background-image: url("https://www.economist.com/cdn-cgi/image/width=1096,quality=80,format=auto/sites/default/files/images/print-edition/20170826_MAP003_0.jpg");
+  background: rgb(86,154,81);
+background: linear-gradient(90deg, rgba(86,154,81,1) -90%, rgba(6,48,1,1) 200%);
 }
 
 .regtitle{

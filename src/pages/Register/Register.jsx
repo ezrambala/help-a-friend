@@ -34,7 +34,7 @@ export default function Register() {
                 await setDoc(
                   doc(db, "Users", userIden),
                   {
-                    displayName: formInfo.username,
+                    userType: 1,
                   },
                   { merge: true }
                 );

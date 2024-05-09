@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 import { signOut } from "firebase/auth";
-
+import { getDoc, doc } from "firebase/firestore";
 import { useMediaQuery } from "react-responsive";
-
 import UserIcon from "../svg/UserIcon";
 import imglogo from "../images/logo.png";
 import Menusvg from "../svg/Menusvg";
@@ -14,6 +13,7 @@ export default function Header({ userId, userPhotoURL }) {
   const [userMenu, setUserMenu] = useState(false);
   const [navLinkList, setNavLinkList] = useState(false);
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState(null);
   const isMobile = useMediaQuery({ query: "(max-width: 725px)" });
   function userLogout() {
     signOut(auth)
@@ -25,7 +25,16 @@ export default function Header({ userId, userPhotoURL }) {
         alert("there was an error");
       });
   }
-
+  async function getUser() {
+    const userInfo = await getDoc(doc(db, "Users", userId));
+    const userData = userInfo.data();
+    setUserInfo(userData);
+  }
+  useEffect(() => {
+    if (userId) {
+      getUser();
+    }
+  }, [userId]);
   return (
     <div className="two-header">
       <div>
@@ -152,6 +161,26 @@ export default function Header({ userId, userPhotoURL }) {
                 >
                   <div> Update Profile Photo</div>
                 </Link>
+                {userInfo?.userType == 12 ? (
+                  <>
+                    <Link
+                      className="orphanage-login-dpdown  dp-heading-font-family "
+                      to={
+                        "/upload-orp-profile-photo/" + userInfo.orphanageCreated
+                      }
+                    >
+                      <div> Update Orphange Photo</div>
+                    </Link>
+                    <Link
+                      className="orphanage-login-dpdown  dp-heading-font-family "
+                      to={"/orphanage-earnings/" + userInfo.orphanageCreated}
+                    >
+                      <div>Orphange Earnings</div>
+                    </Link>
+                  </>
+                ) : (
+                  <></>
+                )}
                 <Link
                   className="orphanage-login-dpdown  dp-heading-font-family "
                   to={"/your-donations"}

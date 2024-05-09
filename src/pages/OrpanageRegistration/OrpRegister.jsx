@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./orpregister.css";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import { collection, addDoc, serverTimestamp, setDoc, doc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
 
 export default function OrpRegister() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [formInfo, setFormInfo] = useState({
     name: "",
     address: "",
@@ -22,9 +24,17 @@ export default function OrpRegister() {
     livingCon: "",
     speNeedsDescrip: "",
   });
+const userIden = user?.uid;
 
-  // const dte = curDate.toDateString();
-  // console.log(dte);
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+      } else {
+        navigate("/");
+      }
+    });
+  }, []);
 
   function handleSubmitForm(event) {
     event.preventDefault();
@@ -44,8 +54,26 @@ export default function OrpRegister() {
       living_condition: formInfo.livingCon,
       special_needs_description: formInfo.speNeedsDescrip,
       createdAt: serverTimestamp(),
+      createdBy: user?.uid,
+      status: false,
     })
-      .then((docRef) => {
+      .then(async (docRef) => {
+        const changeUserInfo = async () => {
+          try {
+            await setDoc(
+              doc(db, "Users", userIden),
+              {
+                userType: 12,
+                orphanageCreated: docRef.id,
+              },
+            );
+           
+          } catch (e) {
+            const errorMessage = e.message;
+            alert(errorMessage);
+          }
+        };
+        changeUserInfo();
         alert("Orphanage Registered");
         navigate("/upload-orp-photos/" + docRef.id);
       })

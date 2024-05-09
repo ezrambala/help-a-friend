@@ -18,7 +18,7 @@
 
 
 .pagecontent{
-    /* background-image: url("https://www.economist.com/cdn-cgi/image/width=1096,quality=80,format=auto/sites/default/files/images/print-edition/20170826_MAP003_0.jpg"); */
+    background-image: url("https://www.economist.com/cdn-cgi/image/width=1096,quality=80,format=auto/sites/default/files/images/print-edition/20170826_MAP003_0.jpg");
     background-repeat: repeat-y;
     background-size: 100%;
     height: fit-content;
@@ -323,6 +323,7 @@
 
 .campaigns{
     padding-top: 20px;
+    margin-bottom: 10px;
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
@@ -331,42 +332,33 @@
 
 .orp-campaigncard{
     width: 490px;
-    height: 300px;
-    border-width: 3px;
-    border-radius: 6px;
-    border: 3px solid #b6d9b3;
-    box-sizing: border-box;
+    height: 200px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 25px;
-    padding: 10px;
+    overflow: hidden;
     background-color: white;
+    position: relative;
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
 }
 
+
 .orp-campaigncard-divone{
-    border-radius: 18px;
     width: 180px;
-    height: 95%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     transition: 0.3s;
-    margin-bottom: 5px;
-    box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
-    -webkit-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
-    -moz-box-shadow: 14px 11px 18px -3px rgba(158,158,158,0.69);
-}
-.orp-campaigncard-divone:hover{
-    box-shadow: none;
-    border-radius: 2px;
-    transition: 1.4s;
-    margin-bottom: 0px;
 }
 .campaign-img{
-    width: 600px;
+    width: 400px;
 }
-
+.campaign-details{
+    padding-top: 10px;
+}
 .cp-det-header{
     font-family: "Madimi One", sans-serif;
     font-size: 22px;
@@ -377,23 +369,33 @@
     font-weight: 400;
     font-size: 15px;
     overflow: hidden;
-    height: 150px;
+    height: 100%;
     width: 250px;
-  
-
 }
 
 .orp-cpcard-divtwo{
     display: flex;
     flex-direction: column;
     width: 250px;
-    
+    height: 100%;
     
 }
 
 .cp-det-btn{
+    position: absolute;
+    left: 0;
+    top:-400px;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(96, 96, 96, 0.909);
+    transition: 1s;
+}
+.orp-campaigncard:hover .cp-det-btn{
+    top:0;
+    transition: .4s;
 }
 
 .cpcd-dnt{
@@ -407,6 +409,7 @@
     outline: none;
     border-radius: 7px;
    font-size: 12px;
+   font-weight: 600;
    background: rgb(197,29,126);
    background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 100%); 
 }
