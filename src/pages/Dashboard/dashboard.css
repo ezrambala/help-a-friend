@@ -265,14 +265,46 @@
 .orp-detailcard{
     padding: 15px;
     display: flex;
-    box-sizing: border-box;
     justify-content: flex-start;
     gap: 6px;
-    background-color: rgb(255, 255, 255);
     width: 560px;
     border-radius: 20px;
-    box-shadow: 0 3px 10px rgb(0,0,0,0.2);
-    
+    position: relative;
+    color: white;
+    overflow: hidden;
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
+    background: rgb(42,136,35);
+background: linear-gradient(90deg, rgba(42,136,35,1) -100%, rgba(192,187,72,1) 100%);
+ 
+}
+.orp-detailcard:hover{
+    background: linear-gradient(321deg, #2a8823, #c0bb48, #c0bb48, #2a8823);
+    background-size: 800% 800%;
+
+    -webkit-animation: AnimationName 26s ease infinite;
+    -moz-animation: AnimationName 26s ease infinite;
+    -o-animation: AnimationName 26s ease infinite;
+    animation: AnimationName 26s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 32%}
+    50%{background-position:100% 69%}
+    100%{background-position:0% 32%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 32%}
+    50%{background-position:100% 69%}
+    100%{background-position:0% 32%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 32%}
+    50%{background-position:100% 69%}
+    100%{background-position:0% 32%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 32%}
+    50%{background-position:100% 69%}
+    100%{background-position:0% 32%}
 }
 
 .orp-bio{
@@ -289,34 +321,93 @@
 
 .oprcard-head{
     font-family: "Madimi One", sans-serif;
-    color: #668663;
+    color: white;
 }
 
 .orpcard-footer{
+    width: 350px;
     height: 25px;
     font-size: 12px;
     box-sizing: border-box;
     margin-top: 10px;
     display: flex;
     justify-content: flex-start;
-    gap: 34px;
     font-family: "Madimi One", sans-serif;
-    color: rgb(104, 104, 104);
+    color: rgb(229, 229, 229);
+}
+.orp-card-info{
+    width: 100px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.orp-card-info-2{
+    width: 250px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+.orp-card-btns-cont{
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+}
 .orp-card-btns{
+    width: 200px;
+    height: 100%;
     box-sizing: border-box;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    border-style: double;
-    border-width: 3px;
-    border-color: #668663;
-    border-radius: 10px;
-    height: fit-content;
-}
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-left: -500px;
+    transition: 1s;
+    z-index: 20;
 
+}
+.orp-card-bck-img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    opacity: 0.2;
+}
+.orp-detailcard:hover .orp-card-btns{
+    margin-left: 0px;
+    transition: 1s;
+}
+.new-orp-donate-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: white 6px double;
+    border-radius: 15px;
+    background: none;
+    color: white;
+    margin-left: 6px;
+    margin-right: 5px;
+    outline: none;
+}  
+.new-orp-donate-btn:disabled{
+    color: grey;
+    border-color: grey;
+} 
 
 
 /* Orphange Campaign Card */

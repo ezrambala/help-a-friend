@@ -187,7 +187,7 @@ export default function Dashboard() {
                       >
                         <div> Update Profile Photo</div>
                       </Link>
-                      {userInfo.userType == 12 ? (
+                      {userInfo?.userType == 12 ? (
                         <>
                           <Link
                             className="orphanage-login-dpdown  dp-heading-font-family "
@@ -281,46 +281,47 @@ export default function Dashboard() {
                           {orpl.orphanage_biography}
                         </div>
                         <div className="orpcard-footer">
-                          <p>{orpl.num_of_residents} Residents!</p>
-                          <p>
-                            {orpl.address}
+                          <div className="orp-card-info">
+                            {orpl.num_of_residents} Residents!
+                          </div>
+                          <p className="orp-card-info-2">
                             <ExcSvg height={"14px"} width={"14px"} />
+                            {orpl.address}
                           </p>
                         </div>
                       </div>
+                      <div className="orp-card-btns-cont">
+                        <div className="orp-card-btns">
+                          <div>
+                            <button
+                              className="new-orp-donate-btn"
+                              onClick={() => {
+                                setButtonState(true);
 
-                      <div className="orp-card-btns">
-                        <div>
-                          <button
-                            className="CartBtn"
-                            onClick={() => {
-                              setButtonState(true);
-
-                              const uploadToDonateList = async () => {
-                                try {
-                                  await setDoc(
-                                    doc(db, "ToDonateList", user?.uid),
-                                    { [orpl.id]: orpl.id },
-                                    { merge: true }
-                                  );
-                                } catch (error) {
-                                  switch (error.message) {
-                                    case "Cannot read properties of undefined (reading 'indexOf')":
-                                      navigate("/register");
-                                      break;
-                                    default:
-                                      setButtonState(false);
+                                const uploadToDonateList = async () => {
+                                  try {
+                                    await setDoc(
+                                      doc(db, "ToDonateList", user?.uid),
+                                      { [orpl.id]: orpl.id },
+                                      { merge: true }
+                                    );
+                                  } catch (error) {
+                                    switch (error.message) {
+                                      case "Cannot read properties of undefined (reading 'indexOf')":
+                                        navigate("/register");
+                                        break;
+                                      default:
+                                        setButtonState(false);
+                                    }
                                   }
-                                }
-                                setButtonState(false);
-                              };
-                              uploadToDonateList();
-                            }}
-                            disabled={buttonState}
-                          >
-                            <span className="IconContainer">
+                                  setButtonState(false);
+                                };
+                                uploadToDonateList();
+                              }}
+                              disabled={buttonState}
+                            >
                               <svg
-                                fill="#000000"
+                                fill="#ffffff"
                                 height="18px"
                                 width="18px"
                                 version="1.1"
@@ -347,25 +348,26 @@ export default function Dashboard() {
                                   </g>
                                 </g>
                               </svg>
-                            </span>
-                            <p className="text">To-Donate List</p>
-                          </button>
-                        </div>
-                        <div>
-                          <button
-                            className="CartBtn carbtn2"
-                            onClick={() => {
-                              navigate(
-                                "/donation/" + orpl.id + "/" + orpl.name
-                              );
-                            }}
-                            disabled={buttonState}
-                          >
-                            <span className="IconContainer">
+
+                              <div className="dp-heading-font-family">
+                                To-Donate List
+                              </div>
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              className="new-orp-donate-btn"
+                              onClick={() => {
+                                navigate(
+                                  "/donation/" + orpl.id + "/" + orpl.name
+                                );
+                              }}
+                              disabled={buttonState}
+                            >
                               <svg
-                                fill="#000000"
-                                height="20px"
-                                width="20px"
+                                fill="#ffffff"
+                                height="22px"
+                                width="22px"
                                 version="1.1"
                                 id="Layer_1"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -394,9 +396,18 @@ export default function Dashboard() {
                                   </g>
                                 </g>
                               </svg>
-                            </span>
-                            <p className="text">Donate</p>
-                          </button>
+
+                              <div className="dp-heading-font-family">
+                                Donate
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                        <div className="orp-card-bck-img">
+                          <img
+                            width={"150%"}
+                            src={orpl.orphanage_profile_photo}
+                          ></img>
                         </div>
                       </div>
                     </div>

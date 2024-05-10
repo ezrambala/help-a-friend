@@ -1,0 +1,25 @@
+.fillter-sec{
+    margin-top: 40px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 20px;
+    font-family: "Madimi One", sans-serif;
+    justify-content: flex-start;
+    align-items: center;
+}
+.to-frm{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    font-family: "Madimi One", sans-serif;
+}
+.tot-amoun{
+    font-family: "Madimi One", sans-serif;
+    font-size: 20px;
+    margin-top: 10px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
