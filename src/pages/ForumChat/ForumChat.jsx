@@ -90,7 +90,7 @@ export default function ForumChat() {
     chatBoxRef.current.scrollTop= chatBoxRef.current.scrollHeight;
   
    
-    if (formInfo.text !== "" && formInfo.text.length < 540) {
+    if (formInfo.text !== "" ) {
       const newForminfo = formInfo.text;
       formInfo.text = "";
       await addDoc(collection(db, "forums/" + forumId + "/chats"), {
@@ -191,7 +191,7 @@ export default function ForumChat() {
             event.target.style.minHeight = newMinheight + "px";
           }}
           className="chat-input"
-          maxLength={"5040"}
+          maxLength={"50040"}
           rows="1"
           required
           ref={textareaRef}

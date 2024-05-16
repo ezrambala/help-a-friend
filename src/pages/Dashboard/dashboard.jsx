@@ -405,7 +405,7 @@ export default function Dashboard() {
                         </div>
                         <div className="orp-card-bck-img">
                           <img
-                            width={"150%"}
+                            height={"150%"}
                             src={orpl.orphanage_profile_photo}
                           ></img>
                         </div>

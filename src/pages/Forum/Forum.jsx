@@ -112,10 +112,10 @@ export default function Forum() {
                     <img width={"32px"} src={forum.creatorUrl} alt=""></img>
                   </div>
                 </div>
-                <div className="forum-ct-two">
+                {/* <div className="forum-ct-two">
                   <div>150 Members</div>
                   <button className="forum-card-button">JOIN</button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
