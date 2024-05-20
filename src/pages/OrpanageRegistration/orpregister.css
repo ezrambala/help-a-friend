@@ -51,4 +51,11 @@
     border: 1px #173b13 dashed;
     height: 40px;
     width: 80px;
+    cursor: pointer;
+}
+.fixed-btn-sbt{
+    position: fixed;
+    width: 140px;
+    right: 130px;
+    bottom: 100px;
 }

@@ -23,3 +23,37 @@
     align-items: center;
     justify-content: center;
 }
+
+.share-orp-page{
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-left: 20px;
+    height: 70px;
+    width: 350px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
+}
+.sh-orp-btn{
+    border: none;
+    outline: none;
+    color: white;
+    background-color: rgb(109, 167, 112);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.sh-orp-btn:hover{
+    background-color: rgb(108, 114, 114);
+}

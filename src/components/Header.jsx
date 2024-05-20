@@ -156,6 +156,12 @@ export default function Header({ userId, userPhotoURL }) {
                   <div> Create Forum </div>
                 </Link>
                 <Link
+                  className="orphanage-login-dpdown  dp-heading-font-family "
+                  to={"/register-event"}
+                >
+                  <div> Register Event </div>
+                </Link>
+                <Link
                   className="orphanage-login-dpdown  dp-heading-font-family dpdown-margin"
                   to={"/upload-user-profile-photo"}
                 >

@@ -21,6 +21,7 @@ import CampaignDonation from "./pages/CampaignDonation/CampaignDonation";
 import UserDonation from "./pages/UserDonations/UserDonations";
 import OrphanageEarnings from "./pages/OrphanageEarnings/OrphangeEarnings";
 import RegisterEvent from "./pages/RegisterEvent/RegisterEvent";
+import ManageOrphanage from "./pages/ManageOrphanages/ManageOrphanage";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="your-donations" element={<UserDonation/>} />
         <Route path="orphanage-earnings/:orphanageid" element={<OrphanageEarnings/>} />
         <Route path="register-event" element={<RegisterEvent/>} />
+        <Route path="manage-orphanage" element={<ManageOrphanage/>} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>

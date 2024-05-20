@@ -13,8 +13,8 @@ export default function Forum() {
   const [user, setUser] = useState(null);
   const [moveCarousel, setMoveCarousel] = useState(false);
   const [forumList, setForumList] = useState(null);
+  const [eventList, setEventList] = useState(null);
   const navigate = useNavigate();
-  const array2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -29,6 +29,7 @@ export default function Forum() {
 
   useEffect(() => {
     getForums();
+    getEvents();
   }, []);
 
   async function scrollBack(e) {
@@ -77,6 +78,58 @@ export default function Forum() {
     }));
     setForumList(ForumData);
   };
+  const getEvents = async () => {
+    const allEvents = await getDocs(collection(db, "events"));
+    const EventData = allEvents.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setEventList(EventData);
+  };
+  function returnDay(num) {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    return days[num];
+  }
+  function returnMonth(num) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return months[num];
+  }
+  function returnSuffix(num) {
+    if (num >= 11 && num <= 13) {
+      return num + "th";
+    }
+    switch (num % 10) {
+      case 1:
+        return num + "st";
+      case 2:
+        return num + "nd";
+      case 3:
+        return num + "rd";
+      default:
+        return num + "th";
+    }
+  }
 
   if (!user || !forumList) {
     return <Spinner />;
@@ -127,33 +180,37 @@ export default function Forum() {
         </div>
         <div className="ev-li-container">
           <div className="events-list " ref={carouselRef}>
-            {array2.map((event, index) => {
+            {eventList?.map((event, index) => {
               return (
                 <div className="event-card">
                   <div className="event-card-image">
-                    <img width={"200px"} src={eventimage} alt="no image"></img>
+                    <img
+                      height={"200px"}
+                      src={event.eventPhotoUrl}
+                      alt="no image"
+                    ></img>
                   </div>
                   <div className="event-details" tabindex="1">
-                    <div className="event-date">Monday, 31st July</div>
+                    <div className="event-date">
+                      {returnDay(new Date(event.date).getDay()) +
+                        ", " +
+                        returnSuffix(new Date(event.date).getDate()) +
+                        " " +
+                        returnMonth(new Date(event.date).getMonth()) +
+                        " " +
+                        new Date(event.date).getFullYear()}
+                    </div>
                     <div className="event-info">
-                      <p className="eventss-name">
-                        Hope for Orphans: A Seminar on Empowering Futures
-                      </p>
+                      <p className="eventss-name">{event.name}</p>
                       <div className="event-description">
-                        This seminar aims to provide a platform for discussing
-                        strategies and initiatives to empower orphaned children,
-                        offering them hope for a brighter future. Through
-                        insightful discussions and practical workshops,
-                        attendees will explore ways to support and nurture the
-                        potential of orphaned youth, fostering resilience and
-                        opportunities for success.
+                        {event.description}
                       </div>
                     </div>
-                    <div className="event-location">31st District Guzape</div>
+                    <div className="event-location">{event.eventType}</div>
                     <div className="event-notfication-dot"></div>
                     <a
                       className="event-web-link"
-                      href="https://manuarora.in/boxshadows"
+                      href={event.websiteURL}
                       target="_blank"
                     >
                       <LinkSvg width={"24px"} height={"24px"} />

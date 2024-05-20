@@ -207,6 +207,7 @@
     height: 250px;
     z-index: 999;
     overflow-x: auto;
+   
     border-radius: 10px;
     background: rgb(197,29,126);
     background: linear-gradient(143deg, rgba(197,29,126,1) 0%, rgba(100,184,105,1) 100%); 
@@ -215,7 +216,13 @@
 .event-details:focus .event-description{
     display: block;
     display: flex;
-    flex-wrap: wrap;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 12px;
+    white-space: pre-wrap;
+    height: 150px;
+    overflow-y: scroll;
 }
 .event-details:focus .eventss-name{
     width: 400px;
@@ -267,7 +274,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    animation: myanimation 2s infinite
+    animation: myanimation 1s infinite
 }
 .event-web-link{
     position: absolute;

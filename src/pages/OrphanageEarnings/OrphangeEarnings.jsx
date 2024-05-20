@@ -20,10 +20,18 @@ export default function OrphanageEarnings() {
   const orphanageId = params.orphanageid;
   const [tableInfo, setTableInfo] = useState(null);
   const [filterValue, setFilterValue] = useState(0);
+  const [orphanageList, setOrphanageList] = useState(null);
   const [filterValue2, setFilterValue2] = useState(0);
-  let totalAmount  = 0;
-  
-  
+  const [linkValue, setLinkValue] = useState("Copy Link!");
+  const [linkValue2, setLinkValue2] = useState("Copy Link!");
+  let totalAmount = 0;
+  let orpLink = "https://helpafriend.netlify.app/orphanage/" + orphanageId;
+  let donateLink =
+    "https://helpafriend.netlify.app/donation/" +
+    orphanageId +
+    "/" +
+    orphanageList?.name;
+
   useEffect(() => {
     onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
@@ -46,6 +54,7 @@ export default function OrphanageEarnings() {
         navigate("/");
       } else {
         getDonationInfo();
+        getOrphanages();
       }
       setUserInfo(userData);
     }
@@ -64,6 +73,19 @@ export default function OrphanageEarnings() {
         id: doc.id,
       }));
       setTableInfo(donationData);
+    }
+  };
+  const getOrphanages = async () => {
+    try {
+      const allOrphanages = await getDoc(doc(db, "orphanages", orphanageId));
+      if (allOrphanages.exists()) {
+        const orphanageData = allOrphanages.data();
+        setOrphanageList(orphanageData);
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error fetching orphanages:", error);
     }
   };
   function returnDay(num) {
@@ -132,6 +154,7 @@ export default function OrphanageEarnings() {
             id="calendar"
             name="calendar"
             onChange={(event) => {
+              console.log(Date.parse(event.target.value));
               setFilterValue2(parseInt(Date.parse(event.target.value)));
             }}
           ></input>
@@ -148,34 +171,68 @@ export default function OrphanageEarnings() {
             </thead>
             <tbody>
               {tableInfo?.map((info, index) => {
-                
                 const amount = info.amount
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 const dFormat = parseInt(info.createdAt.seconds * 1000);
-                  if (dFormat >= filterValue && dFormat <= filterValue2) {
-                    totalAmount = totalAmount + parseInt(info.amount)
-                    return (
-                      <tr key={index}>
-                        <td>{"₦ " + amount}</td>
-                        <td>
-                          {returnDay(info.createdAt.toDate().getDay()) +
-                            ", " +
-                            returnSuffix(info.createdAt.toDate().getDate()) +
-                            " " +
-                            returnMonth(info.createdAt.toDate().getMonth()) +
-                            " " +
-                            info.createdAt.toDate().getFullYear()}
-                        </td>
-                      </tr>
-                    );
-                  }
-                
+                if (dFormat >= filterValue && dFormat <= filterValue2) {
+                  totalAmount = totalAmount + parseInt(info.amount);
+                  return (
+                    <tr key={index}>
+                      <td>{"₦ " + amount}</td>
+                      <td>
+                        {returnDay(info.createdAt.toDate().getDay()) +
+                          ", " +
+                          returnSuffix(info.createdAt.toDate().getDate()) +
+                          " " +
+                          returnMonth(info.createdAt.toDate().getMonth()) +
+                          " " +
+                          info.createdAt.toDate().getFullYear()}
+                      </td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>
         </div>
         <div className="tot-amoun">Total Amount: {totalAmount} </div>
+        <div className="share-orp-page">
+          Share Orphanage Link
+          <div
+            className="sh-orp-btn"
+            onClick={async () => {
+              navigator.clipboard.writeText(orpLink);
+              setLinkValue((prev) => {
+                if (linkValue == "Copy Link!") {
+                  return "Copied !";
+                } else {
+                  return "Copy Link!";
+                }
+              });
+            }}
+          >
+            {linkValue}
+          </div>
+        </div>
+        <div className="share-orp-page">
+          Share Donation Link
+          <div
+            className="sh-orp-btn"
+            onClick={async () => {
+              navigator.clipboard.writeText(donateLink);
+              setLinkValue2((prev) => {
+                if (linkValue2 == "Copy Link!") {
+                  return "Copied !";
+                } else {
+                  return "Copy Link!";
+                }
+              });
+            }}
+          >
+            {linkValue2}
+          </div>
+        </div>
       </div>
     </div>
   );

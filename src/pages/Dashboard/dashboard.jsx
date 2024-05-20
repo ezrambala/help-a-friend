@@ -5,7 +5,7 @@ import ExcSvg from "../../svg/ExcSvg";
 import UserIcon from "../../svg/UserIcon";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { collection, getDocs, setDoc, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc, getDoc, query,where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import imglogo from "../../images/logo.png";
 import orpcamimg from "../../images/orphanagecampaign.jpg";
@@ -23,6 +23,7 @@ export default function Dashboard() {
   const [capUsername, setCapUsername] = useState(null);
   const [buttonState, setButtonState] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [copyValue, setCopyValue] = useState("Share");
   const [userMenu, setUserMenu] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
@@ -48,7 +49,8 @@ export default function Dashboard() {
     setUserInfo(userData);
   }
   const getOrphanages = async () => {
-    const allOrphanages = await getDocs(collection(db, "orphanages"));
+    const q = query(collection(db, "orphanages"), where("status", "==", true));
+    const allOrphanages = await getDocs(q);
     const orphanageData = allOrphanages.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
@@ -180,6 +182,12 @@ export default function Dashboard() {
                         to={"/create-forum"}
                       >
                         <div> Create Forum </div>
+                      </Link>
+                      <Link
+                        className="orphanage-login-dpdown  dp-heading-font-family "
+                        to={"/register-event"}
+                      >
+                        <div> Register Event </div>
                       </Link>
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family "
@@ -402,6 +410,28 @@ export default function Dashboard() {
                               </div>
                             </button>
                           </div>
+                          <div>
+                            <button
+                              className="new-orp-donate-btn"
+                              onClick={() => {
+                                navigator.clipboard.writeText(
+                                  "https://helpafriend.netlify.app/donation/" + orpl.id + "/" + orpl.name
+                                );
+                                setCopyValue("Link Copied !");
+                                const timerId = setTimeout(async () => {
+                                  setCopyValue("Share");
+                                }, 1000);
+
+                                // Clean up the timer to avoid memory leaks
+                                return () => clearTimeout(timerId);
+                              }}
+                              disabled={buttonState}
+                            >
+                              <div className="dp-heading-font-family">
+                                {copyValue}
+                              </div>
+                            </button>
+                          </div>
                         </div>
                         <div className="orp-card-bck-img">
                           <img
@@ -454,21 +484,39 @@ export default function Dashboard() {
                           </div>
                         </div>
                         <div className="cp-det-btn">
-                          <div>
-                            <button
-                              onClick={() => {
-                                navigate(
-                                  "/campaign-donation/" +
-                                    camp.id +
-                                    "/" +
-                                    camp.title
-                                );
-                              }}
-                              className="cpcd-dnt"
-                            >
-                              Donate
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => {
+                              navigate(
+                                "/campaign-donation/" +
+                                  camp.id +
+                                  "/" +
+                                  camp.title
+                              );
+                            }}
+                            className="cpcd-dnt"
+                          >
+                            Donate
+                          </button>
+                          <button
+                            onClick={async () => {
+                              navigator.clipboard.writeText(
+                                "https://helpafriend.netlify.app/campaign-donation/" +
+                                  camp.id +
+                                  "/" +
+                                  camp.title
+                              );
+                              setCopyValue("Link Copied !");
+                              const timerId = setTimeout(async () => {
+                                setCopyValue("Share");
+                              }, 2000);
+
+                              // Clean up the timer to avoid memory leaks
+                              return () => clearTimeout(timerId);
+                            }}
+                            className="cpcd-dnt2"
+                          >
+                            {copyValue}
+                          </button>
                         </div>
                       </div>
                     </div>
