@@ -185,7 +185,14 @@ export default function Header({ userId, userPhotoURL }) {
                     </Link>
                   </>
                 ) : (
-                  <></>
+                  <>
+                    <Link
+                      className="orphanage-login-dpdown  dp-heading-font-family "
+                      to={"/orpregister"}
+                    >
+                      <div>Register Orphanage</div>
+                    </Link>
+                  </>
                 )}
                 <Link
                   className="orphanage-login-dpdown  dp-heading-font-family "

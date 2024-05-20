@@ -216,7 +216,16 @@ export default function Dashboard() {
                           </Link>
                         </>
                       ) : (
-                        <></>
+                        <>
+                          <Link
+                            className="orphanage-login-dpdown  dp-heading-font-family "
+                            to={
+                              "/orpregister" 
+                            }
+                          >
+                            <div>Register Orphanage</div>
+                          </Link>
+                        </>
                       )}
                       <Link
                         className="orphanage-login-dpdown  dp-heading-font-family "
